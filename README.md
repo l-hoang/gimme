@@ -7,8 +7,14 @@
 
 ## Language Specification
 
-GIMME NUMBER
+`GIMME NUMBER`
 
-GIMME STRING
+Gives you a random number between 100 and -100 inclusive.
 
-GIMME BOOLEAN
+`GIMME <x> LENGTH STRING`
+
+Gives you a random string of lower case letters with length x.
+
+`GIMME BOOL`
+
+Gives you true or false.
