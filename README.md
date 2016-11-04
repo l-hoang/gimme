@@ -11,11 +11,7 @@
 
 Gives you a random number between 100 and -100 inclusive.
 
-`GIMME NUMBER BETWEEN <x> and <y>`
-
-Gives you a random number between `x` and `y` inclusive.
-
-`GIMME <x> LENGTH STRING`
+`GIMME STRING`
 
 Gives you a random string of lower case letters with length x.
 
