@@ -7,4 +7,8 @@
 
 ## Language Specification
 
+GIMME NUMBER
 
+GIMME STRING
+
+GIMME BOOLEAN
