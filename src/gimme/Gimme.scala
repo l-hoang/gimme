@@ -74,11 +74,11 @@ class Gimme {
 
     /* gives me (at the moment) a 5 character string */
     def STRING = {
-      val char1 = rng nextPrintableChar() toString
-      val char2 = rng nextPrintableChar() toString
-      val char3 = rng nextPrintableChar() toString
-      val char4 = rng nextPrintableChar() toString
-      val char5 = rng nextPrintableChar() toString
+      val char1 = (rng nextPrintableChar) toString
+      val char2 = (rng nextPrintableChar) toString
+      val char3 = (rng nextPrintableChar) toString
+      val char4 = (rng nextPrintableChar) toString
+      val char5 = (rng nextPrintableChar) toString
         
       val finalString = char1 + char2 + char3 + char4 + char5
 

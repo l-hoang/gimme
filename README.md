@@ -8,6 +8,11 @@
 
 ## Language Specification
 
+Gimme works by giving you things whenever you ask for them. The thing you
+asked for will then be stored in program state.
+When you request something else after you've already asked it to give you
+something, the last thing it "gave" you will be overwritten.
+
 `GIMME NUMBER`
 
 Gives you a random number between 0 and 100 that is then stored in program state.
@@ -22,7 +27,7 @@ Gives you true or false that is then stored in program state.
 
 `GIMME OUTPUT`
 
-Prints the last thing you requested the program to give you.
+Prints to stdout the last thing you requested the program to give you.
 
 **Note that all lines should end with a semi-colon or bad things might happen**. The
 purpose of the semi-colon is the stop the runtime from trying to parse the next
