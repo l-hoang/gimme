@@ -16,24 +16,21 @@ class Gimme {
   object GIMME {
     /* generates a random number from 0 to 100 inclusive and saves it*/
     def NUMBER = {
-        val result = rng nextInt 100
-        currentState setNumber result
+      currentState setNumber (rng nextInt 100)
+    }
+
+    // class that represents the NUMBER keyword
+    abstract sealed class NumberWord
+    object NUMBER extends NumberWord
+
+    /* the A keyword marks the beginning of a gimme/between construct */
+    def A(n: NumberWord) = {
+      new NumberContinue
     }
 
     /* gimme a random bool */
     def BOOL = {
-      val result = rng nextInt 1
-
-      // depending on 0 or 1, set true or false
-      result match {
-        case 0 =>
-          currentState setBool false
-        case 1 =>
-          currentState setBool true
-        case _ => 
-          throw new RuntimeException("GIMME BOOL should only " +
-                                     "generate 0 or 1")
-      }
+      currentState setBool rng.nextBoolean
     }
 
     /* gives me (at the moment) a 5 character string */
@@ -52,6 +49,27 @@ class Gimme {
     /* outputs the last thing that was gimme'd */
     def OUTPUT = {
       currentState.output
+    }
+  }
+
+
+  /* continues the parse of a Gimme A Number line */
+  class NumberContinue {
+    def BETWEEN(lowerBound: Int) = {
+      currentState setLowerBound lowerBound
+
+      // continue the parse
+      AndContinue
+    }
+  }
+
+  /* continues the Between/And construction for numbers */
+  object AndContinue {
+    def AND(upperBound: Int) = {
+      currentState setUpperBound upperBound
+
+      // finalize by setting number within our bounds
+      currentState setNumberWithBounds
     }
   }
 }
