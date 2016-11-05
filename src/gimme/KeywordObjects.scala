@@ -8,7 +8,7 @@ object NUMBER extends NumberWord
 abstract sealed class StringWord
 object STRING extends StringWord
 
-// class that represents the NUMBER keyword
+// class that represents the BOOL keyword
 abstract sealed class BoolWord
 object BOOL extends BoolWord
 
