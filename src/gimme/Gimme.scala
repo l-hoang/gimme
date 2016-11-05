@@ -44,12 +44,26 @@ class Gimme {
       currentState setBool rng.nextBoolean
     }
 
+    /* if given an int, save it */
+    def A(num: Int) = {
+      currentState setNumber num
+    }
+
+    /* if given a string, save it */
+    def A(s: String) = {
+      currentState setString s
+    }
+
+    /* if given a bool, save it */
+    def A(b: Boolean) = {
+      currentState setBool b
+    }
+
     /* outputs the last thing that was gimme'd */
     def OUTPUT = {
       currentState.output
     }
   }
-
 
   /* continues the parse of a Gimme A Number line */
   object NumberContinue {

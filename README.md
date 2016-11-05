@@ -30,6 +30,10 @@ Gives you a random string of 5 characters that is then stored in program state.
 
 Gives you true or false that is then stored in program state.
 
+`GIMME A <x>`
+Gives you whatever you give it (as long as it's an int, string, or bool) by
+saving it to program state.
+
 `GIMME OUTPUT`
 
 Prints to stdout the last thing you requested the program to give you.
