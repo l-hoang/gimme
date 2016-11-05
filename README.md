@@ -13,15 +13,20 @@ asked for will then be stored in program state.
 When you request something else after you've already asked it to give you
 something, the last thing it "gave" you will be overwritten.
 
-`GIMME NUMBER`
+`GIMME A NUMBER`
 
-Gives you a random number between 0 and 100 that is then stored in program state.
+Gives you a random number between 0 and 99 that is then stored in program state.
 
-`GIMME STRING`
+`GIMME A NUMBER BETWEEN <x> and <y>`
+
+Gives you a random number between x and y inclusive that is then stored in
+program state.
+
+`GIMME A STRING`
 
 Gives you a random string of 5 characters that is then stored in program state.
 
-`GIMME BOOL`
+`GIMME A BOOL`
 
 Gives you true or false that is then stored in program state.
 
