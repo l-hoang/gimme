@@ -1,21 +1,21 @@
 package tests
 
-import gimme.Gimme
+import gimme._
 import scala.language.postfixOps
 
 object SanityTest extends Gimme {
     def main(args: Array[String]) = {
-        GIMME STRING;
+        GIMME A STRING;
         GIMME OUTPUT;
 
-        GIMME NUMBER;
+        GIMME A NUMBER;
         GIMME OUTPUT;
 
-        GIMME BOOL;
+        GIMME A BOOL;
         GIMME OUTPUT;
 
-        GIMME A NUMBER BETWEEN 100 AND 99
-        GIMME OUTPUT;
+        GIMME A NUMBER BETWEEN 100 AND 100
 
+        GIMME OUTPUT;
     }
 }

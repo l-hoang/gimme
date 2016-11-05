@@ -19,22 +19,15 @@ class Gimme {
       currentState setNumber (rng nextInt 100)
     }
 
-    // class that represents the NUMBER keyword
-    abstract sealed class NumberWord
-    object NUMBER extends NumberWord
-
-    /* the A keyword marks the beginning of a gimme/between construct */
+    /* number case; set a random number */
     def A(n: NumberWord) = {
-      new NumberContinue
+      currentState setNumber (rng nextInt 100)
+
+      NumberContinue
     }
 
-    /* gimme a random bool */
-    def BOOL = {
-      currentState setBool rng.nextBoolean
-    }
-
-    /* gives me (at the moment) a 5 character string */
-    def STRING = {
+    /* string case; set a random string */
+    def A(s: StringWord) = {
       val char1 = rng.nextPrintableChar toString
       val char2 = rng.nextPrintableChar toString
       val char3 = rng.nextPrintableChar toString
@@ -46,6 +39,11 @@ class Gimme {
       currentState setString finalString
     }
 
+    /* bool case; set a random bool */
+    def A(b: BoolWord) = {
+      currentState setBool rng.nextBoolean
+    }
+
     /* outputs the last thing that was gimme'd */
     def OUTPUT = {
       currentState.output
@@ -54,7 +52,7 @@ class Gimme {
 
 
   /* continues the parse of a Gimme A Number line */
-  class NumberContinue {
+  object NumberContinue {
     def BETWEEN(lowerBound: Int) = {
       currentState setLowerBound lowerBound
 
