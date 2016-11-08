@@ -59,6 +59,12 @@ class Gimme {
       currentState setBool b
     }
 
+
+    /* simple apply for expressions (i.e. wrapped in parens) */
+    def apply(c: Int) = {
+      currentState setNumber c
+    }
+
     /* outputs the last thing that was gimme'd */
     def OUTPUT = {
       currentState.output
