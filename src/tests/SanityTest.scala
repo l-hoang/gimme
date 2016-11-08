@@ -25,5 +25,8 @@ object SanityTest extends Gimme {
 
         GIMME A true;
         GIMME OUTPUT;
+
+        GIMME A (1000 + 3);
+        GIMME OUTPUT;
     }
 }
