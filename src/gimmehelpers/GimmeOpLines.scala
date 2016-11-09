@@ -16,5 +16,9 @@ object GimmeOpLines {
   case class GimmeBool(bool: Boolean) extends GimmeOp
   case class GimmeBoolRandom() extends GimmeOp
 
+  case class GimmeCondBegin(condLineEnd: Int, 
+                            trueOrFalse: Boolean) extends GimmeOp
+  case class GimmeCondEnd() extends GimmeOp
+
   case class GimmeOutput() extends GimmeOp
 }

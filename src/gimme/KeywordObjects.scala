@@ -12,3 +12,9 @@ object STRING extends StringWord
 abstract sealed class BoolWord
 object BOOL extends BoolWord
 
+abstract sealed class AboveWord
+object ABOVE extends AboveWord
+
+abstract sealed class BelowWord
+object BELOW extends BelowWord
+

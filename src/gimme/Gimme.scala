@@ -14,12 +14,17 @@ class Gimme {
   // the random number generator we will use to generate things
   val rng = new Random()
 
+  /* helper classes that are used to create program data + run it */
   val currentState = new ProgramState
   val lineBuilder = new ProgramLineBuilder
   val programText = new ProgramText
 
   /* The keyword GIMME which starts lines in this language */
   object GIMME {
+    /***********
+     * Numbers *
+     ***********/
+
     /* number case; set a random number */
     def A(n: NumberWord) = {
       programText finishLine lineBuilder
@@ -28,37 +33,11 @@ class Gimme {
       NumberContinue
     }
 
-    /* string case; set a random string */
-    def A(s: StringWord) = {
-      programText finishLine lineBuilder
-      lineBuilder setOp OpEnums.G_STRING_RANDOM
-    }
-
-    /* bool case; set a random bool */
-    def A(b: BoolWord) = {
-      programText finishLine lineBuilder
-      lineBuilder setOp OpEnums.G_BOOL_RANDOM
-    }
-
-    /* if given an int, save it */
+    /* if given an int after A, save it */
     def A(num: Int) = {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue num
       lineBuilder setOp OpEnums.G_NUMBER
-    }
-
-    /* if given a string, save it */
-    def A(s: String) = {
-      programText finishLine lineBuilder
-      lineBuilder setGimmeValue s
-      lineBuilder setOp OpEnums.G_STRING
-    }
-
-    /* if given a bool, save it */
-    def A(b: Boolean) = {
-      programText finishLine lineBuilder
-      lineBuilder setGimmeValue b
-      lineBuilder setOp OpEnums.G_BOOL
     }
 
     /* simple apply for expressions (i.e. wrapped in parens) 
@@ -68,6 +47,64 @@ class Gimme {
       lineBuilder setGimmeValue num
       lineBuilder setOp OpEnums.G_NUMBER
     }
+
+    /***********
+     * Strings *
+     ***********/
+
+    /* string case; set a random string */
+    def A(s: StringWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_STRING_RANDOM
+    }
+
+    /* if given a string, save it */
+    def A(s: String) = {
+      programText finishLine lineBuilder
+      lineBuilder setGimmeValue s
+      lineBuilder setOp OpEnums.G_STRING
+    }
+
+    /************
+     * Booleans *
+     ************/
+
+    /* bool case; set a random bool */
+    def A(b: BoolWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_BOOL_RANDOM
+    }
+
+    /* if given a bool, save it */
+    def A(b: Boolean) = {
+      programText finishLine lineBuilder
+      lineBuilder setGimmeValue b
+      lineBuilder setOp OpEnums.G_BOOL
+    }
+
+    /***************
+     * Conditional *
+     ***************/
+
+    /* the beginning of a conditional */
+    def THE(b: BelowWord) = {
+      programText finishLine lineBuilder
+      lineBuilder.beginConditional
+
+      // find out if looking for a true or a false
+      CondContinue
+    }
+
+    /* the end of a conditional */
+    def THE(a: AboveWord) = {
+      programText finishLine lineBuilder
+      lineBuilder.endConditional
+      lineBuilder setOp OpEnums.G_COND_END
+    }
+
+    /**********
+     * Output *
+     **********/
 
     /* outputs the last thing that was gimme'd */
     def OUTPUT = {
@@ -89,6 +126,21 @@ class Gimme {
     def AND(upperBound: Int) = {
       lineBuilder.setGimmeRange(low, upperBound)
       lineBuilder setOp OpEnums.G_NUMBER_RANGE
+    }
+  }
+
+  /* continues the parse of a conditional */
+  object CondContinue {
+    /* conditional looking for a true */
+    def TRUE = {
+      lineBuilder.conditionalTrueSet
+      lineBuilder setOp OpEnums.G_COND_BEGIN
+    }
+
+    /* conditional looking for a false */
+    def FALSE = {
+      lineBuilder.conditionalFalseSet
+      lineBuilder setOp OpEnums.G_COND_BEGIN
     }
   }
 

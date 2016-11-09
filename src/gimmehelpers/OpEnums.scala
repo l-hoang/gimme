@@ -16,5 +16,8 @@ object OpEnums {
   case object G_BOOL extends GimmeOpEnum
   case object G_BOOL_RANDOM extends GimmeOpEnum
 
+  case object G_COND_BEGIN extends GimmeOpEnum
+  case object G_COND_END extends GimmeOpEnum
+
   case object G_OUTPUT extends GimmeOpEnum
 }
