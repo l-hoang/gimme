@@ -18,4 +18,3 @@ object GimmeOpLines {
 
   case class GimmeOutput() extends GimmeOp
 }
-

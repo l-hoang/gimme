@@ -14,7 +14,7 @@ object SanityTest extends Gimme {
         GIMME A BOOL;
         GIMME OUTPUT;
 
-        GIMME A NUMBER BETWEEN 100 AND 100;
+        GIMME A NUMBER BETWEEN 100 AND 110;
         GIMME OUTPUT;
 
         GIMME A 30;
@@ -31,5 +31,7 @@ object SanityTest extends Gimme {
         
         GIMME (100 - 100 + 2);
         GIMME OUTPUT;
+
+        RUN;
     }
 }
