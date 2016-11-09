@@ -1,4 +1,4 @@
-package gimme
+package gimmehelpers
 
 // for the random number generator
 import scala.util.Random
