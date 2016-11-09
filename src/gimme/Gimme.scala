@@ -21,9 +21,9 @@ class Gimme {
 
   /* The keyword GIMME which starts lines in this language */
   object GIMME {
-    /***********
-     * Numbers *
-     ***********/
+    /////////////
+    // Numbers //
+    /////////////
 
     /* number case; set a random number */
     def A(n: NumberWord) = {
@@ -48,9 +48,9 @@ class Gimme {
       lineBuilder setOp OpEnums.G_NUMBER
     }
 
-    /***********
-     * Strings *
-     ***********/
+    /////////////
+    // Strings //
+    /////////////
 
     /* string case; set a random string */
     def A(s: StringWord) = {
@@ -65,9 +65,9 @@ class Gimme {
       lineBuilder setOp OpEnums.G_STRING
     }
 
-    /************
-     * Booleans *
-     ************/
+    //////////////
+    // Booleans //
+    //////////////
 
     /* bool case; set a random bool */
     def A(b: BoolWord) = {
@@ -82,9 +82,9 @@ class Gimme {
       lineBuilder setOp OpEnums.G_BOOL
     }
 
-    /***************
-     * Conditional *
-     ***************/
+    /////////////////
+    // Conditional //
+    /////////////////
 
     /* the beginning of a conditional */
     def THE(b: BelowWord) = {
@@ -102,9 +102,9 @@ class Gimme {
       lineBuilder setOp OpEnums.G_COND_END
     }
 
-    /**********
-     * Output *
-     **********/
+    ////////////
+    // Output //
+    ////////////
 
     /* outputs the last thing that was gimme'd */
     def OUTPUT = {
