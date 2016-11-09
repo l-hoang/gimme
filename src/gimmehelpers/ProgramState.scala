@@ -1,55 +1,31 @@
 package gimmehelpers
 
-/* This class holds the current runtime state of a Gimme program run */
+/* This class holds the current runtime state of a Gimme program run; wraps
+ * a program stack object. */
 class ProgramState {
-  // designates type of object the program state is currently holding
-  abstract sealed class CurrentType
-  case object NullType extends CurrentType
-  case object NumType extends CurrentType
-  case object StringType extends CurrentType
-  case object BoolType extends CurrentType
-
-  var currentSetting: CurrentType = NullType
-
-  // holds the currently "given" number/string/bool
-  var currentNumber: Int = -1
-  var currentString: String = ""
-  var currentBool: Boolean = false
+  // program stack
+  val gimmeStack = new GimmeStack
 
   /* Sets the current number */
   def setNumber(newNumber: Int) = {
-    currentNumber = newNumber
-    currentSetting = NumType
+    gimmeStack addElement newNumber
   }
 
   /* Sets the current string */
   def setString(newString: String) = {
-    currentString = newString
-    currentSetting = StringType
+    gimmeStack addElement newString
   }
 
   /* Sets the current bool */
   def setBool(newBool: Boolean) = {
-    currentBool = newBool
-    currentSetting = BoolType
+    gimmeStack addElement newBool
   }
 
   /* Get the current bool */
-  def getBool = currentBool
+  def getBool = gimmeStack.getLastBool
 
-  /* outputs the last thing that was gimme'd */
+  /* outputs the top thing on the stack (i.e. last gimme'd) */
   def output = {
-    if (currentSetting == NullType) {
-      throw new RuntimeException("Trying to output when nothing has been " +
-                                 "gimme'd yet")
-    }
-        
-    currentSetting match {
-      case NumType => println(currentNumber)
-      case StringType => println(currentString)
-      case BoolType => println(currentBool)
-      case NullType => throw new RuntimeException("Shouldn't get here if nothing is gimme'd")
-    }
+    gimmeStack.outputTop
   }
-
 }
