@@ -31,8 +31,10 @@ Gives you a random string of 5 characters that is then stored in program state.
 Gives you true or false that is then stored in program state.
 
 `GIMME A <x>`
+
 Gives you whatever you give it (as long as it's an int, string, or bool) by
-saving it to program state.
+saving it to program state. Note you can also have an expression wrapped
+in parens (as long as Scala can read it). For example, (1 + 3).
 
 `GIMME OUTPUT`
 
