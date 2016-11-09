@@ -3,10 +3,15 @@
 ## Purposes
 
 * To act as a somewhat easy example for people wanting to build internal DSLs in Scala.
-* For the fun that comes out of defining an insane language that will proably serve no pratical purpose
-* To see how far I can take this :V
+* For the fun that comes out of defining an insane language that will proably 
+serve no practical purpose
+* To see how far I can take this 
 
 ## Language Specification
+
+Gimme is very similar to assembly language programming. 
+Currently it can only store 1 thing in memory, but this will soon change
+with the addition of a stack of sorts.  There is no concept of variables.
 
 Gimme works by giving you things whenever you ask for them. The thing you
 asked for will then be stored in program state.
@@ -36,6 +41,21 @@ Gives you whatever you give it (as long as it's an int, string, or bool) by
 saving it to program state. Note you can also have an expression wrapped
 in parens (as long as Scala can read it). For example, (1 + 3).
 
+`GIMME <x>`
+
+x should be a numeric expression or (TODO) a boolean comparison. Will give
+you it.
+
+`GIMME THE BELOW IF <TRUE/FALSE>`
+
+Beginning of Gimme's conditional construct. Gimme checks the last boolean
+that was gimme'd and will go through the code below if it meets the
+condition specified (true/false).
+
+`GIMME THE ABOVE`
+
+End of Gimme's conditional construct. Marks the end of a conditional. 
+
 `GIMME OUTPUT`
 
 Prints to stdout the last thing you requested the program to give you.
@@ -45,3 +65,4 @@ purpose of the semi-colon is the stop the runtime from trying to parse the next
 thing as an argument of the thing that is possibly returned at the end of each
 line. Another way to get around this would be to put a new line between each
 line, but that makes the code ugly.
+
