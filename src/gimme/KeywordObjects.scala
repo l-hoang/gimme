@@ -12,9 +12,19 @@ object STRING extends StringWord
 abstract sealed class BoolWord
 object BOOL extends BoolWord
 
+// represents TRUE
+abstract sealed class TrueWord
+object TRUE extends TrueWord
+
+// represents FALSE
+abstract sealed class FalseWord
+object FALSE extends FalseWord
+
+// represents ABOVE
 abstract sealed class AboveWord
 object ABOVE extends AboveWord
 
+// represents BELOW
 abstract sealed class BelowWord
 object BELOW extends BelowWord
 

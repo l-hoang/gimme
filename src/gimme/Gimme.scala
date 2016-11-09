@@ -82,6 +82,20 @@ class Gimme {
       lineBuilder setOp OpEnums.G_BOOL
     }
 
+    /* handles the 2 cases where people may put TRUE or FALSE instead of
+     * Scala recognized true and false */
+    def A(t: TrueWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setGimmeValue true
+      lineBuilder setOp OpEnums.G_BOOL
+    }
+
+    def A(f: FalseWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setGimmeValue false
+      lineBuilder setOp OpEnums.G_BOOL
+    }
+
     /////////////////
     // Conditional //
     /////////////////
