@@ -8,10 +8,17 @@ class ProgramLineBuilder {
   // holds last operation
   var currentOp: GimmeOpEnum = G_NONE
 
-  // current values
-  var currentNumber: Int = -1
-  var currentString: String = ""
-  var currentBool: Boolean = false
+  // current values (not necessarily reset every line)
+  var currentNumber = -1
+  var currentString = ""
+  var currentBool = false
+
+  // these are used by gimme number range
+  var low = -1
+  var high = -1
+
+  // marker for first line
+  var firstLine = true
 
   /* set the next op */
   def setOp(newOp: GimmeOpEnum) = {
@@ -33,28 +40,54 @@ class ProgramLineBuilder {
     currentBool = newValue
   }
 
-  def saveLastLine = {
+  /* set the range */
+  def setGimmeRange(l:Int, h:Int) {
+    low = l
+    high = h
+  }
+
+  def returnLine = {
+    var lineToReturn: GimmeOp = GimmeNone
+
     currentOp match {
       case G_NUMBER =>
-        // save num
-        GimmeNum(currentNumber)
+        lineToReturn = GimmeNum(currentNumber)
+
+      case G_NUMBER_RANDOM =>
+        lineToReturn = GimmeNumRandom()
+
+      case G_NUMBER_RANGE =>
+        lineToReturn = GimmeNumRange(low, high)
+
       case G_STRING =>
-        GimmeString(currentString)
+        lineToReturn = GimmeString(currentString)
+
+      case G_STRING_RANDOM =>
+        lineToReturn = GimmeStringRandom()
+
       case G_BOOL =>
-        GimmeBool(currentBool)
+        lineToReturn = GimmeBool(currentBool)
+
+      case G_BOOL_RANDOM =>
+        lineToReturn = GimmeBoolRandom()
+
+      case G_OUTPUT =>
+        lineToReturn = GimmeOutput()
+
       case G_NONE =>
-        // complain/die
+        if (!firstLine) {
+          throw new RuntimeException("Adding an empty line")
+        } else {
+          // first line meaning nothing supposed to be there
+          firstLine = false
+        }
     }
 
     // reset everything in prep for next line
-
     // reset op
     currentOp = G_NONE
 
-    // reset values
-    currentNumber = -1
-    currentString = ""
-    currentBool = false
+    lineToReturn
   }
 
 }
