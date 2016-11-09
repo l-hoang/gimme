@@ -5,17 +5,12 @@ class ProgramLineBuilder {
   import OpEnums._
   import GimmeOpLines._
 
+  /////////////////////////////////
+  // Metadata for building lines //
+  /////////////////////////////////
+
   // holds last operation
   var currentOp: GimmeOpEnum = G_NONE
-
-  // current values (not necessarily reset every line)
-  var currentNumber = -1
-  var currentString = ""
-  var currentBool = false
-
-  // these are used by gimme number range
-  var low = -1
-  var high = -1
 
   // marker for first line
   var firstLine = true
@@ -24,6 +19,16 @@ class ProgramLineBuilder {
   def setOp(newOp: GimmeOpEnum) = {
     currentOp = newOp
   }
+
+
+  ///////////////////////////////////////
+  // Setters for what has been gimme'd //
+  ///////////////////////////////////////
+
+  // current values (not necessarily reset every line)
+  var currentNumber = -1
+  var currentString = ""
+  var currentBool = false
 
   /* set ints */
   def setGimmeValue(newValue: Int) {
@@ -40,12 +45,33 @@ class ProgramLineBuilder {
     currentBool = newValue
   }
 
+  // these are used by gimme number range
+  var low = -1
+  var high = -1
+
   /* set the range */
   def setGimmeRange(l:Int, h:Int) {
     low = l
     high = h
   }
 
+  var condBool = false 
+
+  /* for setting true or false for conditionals */
+  def conditionalTrueSet = {
+    condBool = true
+  }
+
+  def conditionalFalseSet = {
+    condBool = false
+  }
+
+
+  //////////////////////////////////////
+  // Line builder returns a line here //
+  //////////////////////////////////////
+
+  /* Given the metadata that should be set by the DSL "parser", return a line */
   def returnLine = {
     var lineToReturn: GimmeOp = GimmeNone
 
@@ -73,6 +99,12 @@ class ProgramLineBuilder {
 
       case G_OUTPUT =>
         lineToReturn = GimmeOutput()
+
+      case G_COND_BEGIN =>
+        lineToReturn = GimmeCondBegin(-1, condBool)
+
+      case G_COND_END =>
+        lineToReturn = GimmeCondEnd()
 
       case G_NONE =>
         if (!firstLine) {

@@ -34,6 +34,9 @@ class ProgramState {
     currentSetting = BoolType
   }
 
+  /* Get the current bool */
+  def getBool = currentBool
+
   /* outputs the last thing that was gimme'd */
   def output = {
     if (currentSetting == NullType) {

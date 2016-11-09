@@ -32,10 +32,14 @@ object SanityTest extends Gimme {
         GIMME (100 - 100 + 2);
         GIMME OUTPUT;
 
+        GIMME A FALSE;
+
         GIMME THE BELOW IF TRUE;
         GIMME A 3;
         GIMME OUTPUT;
         GIMME THE ABOVE;
+
+        GIMME A FALSE;
 
         GIMME THE BELOW IF FALSE;
         GIMME A (4 + 3);

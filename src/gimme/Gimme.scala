@@ -48,6 +48,22 @@ class Gimme {
       lineBuilder setOp OpEnums.G_NUMBER
     }
 
+    /* continues the parse of a Gimme A Number line */
+    object NumberContinue {
+      def BETWEEN(lowerBound: Int) = {
+        // continue the parse
+        new AndContinue(lowerBound)
+      }
+    }
+  
+    /* continues the Between/And construction for numbers */
+    class AndContinue(low: Int) {
+      def AND(upperBound: Int) = {
+        lineBuilder.setGimmeRange(low, upperBound)
+        lineBuilder setOp OpEnums.G_NUMBER_RANGE
+      }
+    }
+
     /////////////
     // Strings //
     /////////////
@@ -103,7 +119,6 @@ class Gimme {
     /* the beginning of a conditional */
     def THE(b: BelowWord) = {
       programText finishLine lineBuilder
-      lineBuilder.beginConditional
 
       // find out if looking for a true or a false
       CondContinue
@@ -112,9 +127,24 @@ class Gimme {
     /* the end of a conditional */
     def THE(a: AboveWord) = {
       programText finishLine lineBuilder
-      lineBuilder.endConditional
       lineBuilder setOp OpEnums.G_COND_END
     }
+
+    /* continues the parse of a conditional */
+    object CondContinue {
+      /* conditional looking for a true */
+      def IF(t: TrueWord) {
+        lineBuilder.conditionalTrueSet
+        lineBuilder setOp OpEnums.G_COND_BEGIN
+      }
+  
+      /* conditional looking for a false */
+      def IF(t: FalseWord) {
+        lineBuilder.conditionalFalseSet
+        lineBuilder setOp OpEnums.G_COND_BEGIN
+      }
+    }
+
 
     ////////////
     // Output //
@@ -127,36 +157,7 @@ class Gimme {
     }
   }
 
-  /* continues the parse of a Gimme A Number line */
-  object NumberContinue {
-    def BETWEEN(lowerBound: Int) = {
-      // continue the parse
-      new AndContinue(lowerBound)
-    }
-  }
 
-  /* continues the Between/And construction for numbers */
-  class AndContinue(low: Int) {
-    def AND(upperBound: Int) = {
-      lineBuilder.setGimmeRange(low, upperBound)
-      lineBuilder setOp OpEnums.G_NUMBER_RANGE
-    }
-  }
-
-  /* continues the parse of a conditional */
-  object CondContinue {
-    /* conditional looking for a true */
-    def TRUE = {
-      lineBuilder.conditionalTrueSet
-      lineBuilder setOp OpEnums.G_COND_BEGIN
-    }
-
-    /* conditional looking for a false */
-    def FALSE = {
-      lineBuilder.conditionalFalseSet
-      lineBuilder setOp OpEnums.G_COND_BEGIN
-    }
-  }
 
   def RUN = {
     // finish last line
