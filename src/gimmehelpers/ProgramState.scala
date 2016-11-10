@@ -35,45 +35,45 @@ class ProgramState {
   /* does stack addition */
   def stackAddition = {
     gimmeStack addElement 
-     (gimmeStack.getFirst.asNumber + gimmeStack.getSecond.asNumber)
+     (gimmeStack.getNthNumber(0) + gimmeStack.getNthNumber(1))
   }
 
   /* does stack addition given an int */
   def stackAddition(num: Int) = {
-    gimmeStack addElement (num + gimmeStack.getFirst.asNumber)
+    gimmeStack addElement (num + gimmeStack.getNthNumber(0))
   }
 
   /* does stack subtraction */
   def stackSubtraction = {
     gimmeStack addElement 
-     (gimmeStack.getFirst.asNumber - gimmeStack.getSecond.asNumber)
+     (gimmeStack.getNthNumber(0) - gimmeStack.getNthNumber(1))
   }
 
   /* does stack subtraction given an int */
   def stackSubtraction(num: Int) = {
-    gimmeStack addElement (num - gimmeStack.getFirst.asNumber)
+    gimmeStack addElement (num - gimmeStack.getNthNumber(0))
   }
 
   /* does stack multiplication */
   def stackMultiplication = {
     gimmeStack addElement 
-     (gimmeStack.getFirst.asNumber * gimmeStack.getSecond.asNumber)
+     (gimmeStack.getNthNumber(0) * gimmeStack.getNthNumber(1))
   }
 
   /* does stack multiplication given an int */
   def stackMultiplication(num: Int) = {
-    gimmeStack addElement (num * gimmeStack.getFirst.asNumber)
+    gimmeStack addElement (num * gimmeStack.getNthNumber(0))
   }
 
   /* does stack division */
   def stackDivision = {
     gimmeStack addElement 
-     (gimmeStack.getFirst.asNumber / gimmeStack.getSecond.asNumber)
+     (gimmeStack.getNthNumber(0) / gimmeStack.getNthNumber(1))
   }
 
   /* does stack division given an int */
   def stackDivision(num: Int) = {
-    gimmeStack addElement (num / gimmeStack.getFirst.asNumber)
+    gimmeStack addElement (num / gimmeStack.getNthNumber(0))
   }
 
   ////////////

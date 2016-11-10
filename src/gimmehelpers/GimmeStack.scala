@@ -99,6 +99,12 @@ class GimmeStackObject {
     objectType
   }
 
+  def isNumber = {
+    assertInit
+
+    if (objectType == NumType) true else false
+  }
+
   /* return this object as a number (does not work for strings) */
   def asNumber = {
     assertInit
@@ -109,6 +115,8 @@ class GimmeStackObject {
       case BoolType => if (bool) 1 else 0
       case StringType => 
         throw new RuntimeException("not string assertion didn't work")
+      case NullType =>
+        throw new RuntimeException("assert init failure")
     }
   }
 
@@ -120,6 +128,8 @@ class GimmeStackObject {
       case NumType => num.toString
       case BoolType => bool.toString
       case StringType => string
+      case NullType =>
+        throw new RuntimeException("assert init failure")
     }
   }
 
@@ -133,6 +143,9 @@ class GimmeStackObject {
       case BoolType => true
       case StringType => 
         throw new RuntimeException("not string assertion didn't work")
+      case NullType =>
+        throw new RuntimeException("assert init failure")
+
     }
   }
 
@@ -213,6 +226,30 @@ class GimmeStack {
     }
 
     programStack.peekFirst.outputElement
+  }
+
+  def getNthNumber(n: Int): Int = {
+    val objectIterator = programStack.iterator 
+    var counter = 0
+    var toReturn = -1
+    var found = false
+
+    while (objectIterator.hasNext && !found) {
+      val nextObject = objectIterator.next
+
+      if (nextObject.isNumber) {
+        if (counter == n) {
+          toReturn = nextObject.asNumber
+          found = true
+        } else counter += 1
+      }
+    }
+    
+    if (!found) {
+      throw new RuntimeException("not enough numbers in get nth number")
+    }
+
+    toReturn
   }
 
   def getFirst = {
