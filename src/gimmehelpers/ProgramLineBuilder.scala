@@ -106,6 +106,30 @@ class ProgramLineBuilder {
       case G_COND_END =>
         lineToReturn = GimmeCondEnd()
 
+      case G_ADDITION =>
+        lineToReturn = GimmeAddition()
+
+      case G_ADDITION_WITH =>
+        lineToReturn = GimmeAdditionWith(currentNumber)
+
+      case G_SUBTRACTION =>
+        lineToReturn = GimmeSubtraction()
+
+      case G_SUBTRACTION_WITH =>
+        lineToReturn = GimmeSubtractionWith(currentNumber)
+
+      case G_MULTIPLICATION =>
+        lineToReturn = GimmeMultiplication()
+
+      case G_MULTIPLICATION_WITH =>
+        lineToReturn = GimmeMultiplicationWith(currentNumber)
+
+      case G_DIVISION =>
+        lineToReturn = GimmeDivision()
+
+      case G_DIVISION_WITH =>
+        lineToReturn = GimmeDivisionWith(currentNumber)
+
       case G_NONE =>
         if (!firstLine) {
           throw new RuntimeException("Adding an empty line")
