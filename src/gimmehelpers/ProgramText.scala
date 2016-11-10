@@ -92,23 +92,23 @@ class ProgramText {
       var lineJump = false
 
       currentLine match {
-        case GimmeNum(num: Int) => currentState setNumber num
+        case GimmeNum(num) => currentState setNumber num
 
         case GimmeNumRandom() => currentState setNumber (rng nextInt 100)
 
-        case GimmeNumRange(low: Int, high: Int) => 
+        case GimmeNumRange(low, high) => 
           // create a range then select a random number from it
           val chosenRange = (low to high)
           currentState setNumber chosenRange(rng nextInt chosenRange.length)
 
-        case GimmeString(str: String) => currentState setString str
+        case GimmeString(str) => currentState setString str
 
         case GimmeStringRandom() => currentState setString 
           ((rng.nextPrintableChar.toString) + (rng.nextPrintableChar.toString) + 
           (rng.nextPrintableChar.toString) + (rng.nextPrintableChar.toString) + 
           (rng.nextPrintableChar.toString))
 
-        case GimmeBool(bool: Boolean) => currentState setBool bool
+        case GimmeBool(bool) => currentState setBool bool
 
         case GimmeBoolRandom() => currentState setBool rng.nextBoolean
 
@@ -123,6 +123,24 @@ class ProgramText {
           }
 
         case GimmeCondEnd() => // do nothing, just a cond end line
+
+        // TODO binary ops
+        case GimmeAddition() =>
+
+        case GimmeAdditionWith(num) =>
+
+        case GimmeSubtraction() =>
+
+        case GimmeSubtractionWith(num) =>
+
+        case GimmeMultiplication() =>
+
+        case GimmeMultiplicationWith(num) =>
+
+        case GimmeDivision() =>
+        
+        case GimmeDivisionWith(num) =>
+
 
         case GimmeOutput() => currentState.output
 
