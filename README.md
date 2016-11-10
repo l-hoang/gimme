@@ -18,9 +18,10 @@ asked for will then be stored in program state.
 When you request something else after you've already asked it to give you
 something, the last thing it "gave" you will be overwritten.
 
+### Basic Gimmes
 `GIMME A NUMBER`
 
-Gives you a random number between 0 and 99 that is then stored in program state.
+Gives you a random number between 0 and 100(?) that is then stored in program state.
 
 `GIMME A NUMBER BETWEEN <x> and <y>`
 
@@ -41,10 +42,16 @@ Gives you whatever you give it (as long as it's an int, string, or bool) by
 saving it to program state. Note you can also have an expression wrapped
 in parens (as long as Scala can read it). For example, (1 + 3).
 
+`GIMME A <x> WITH OUTPUT`
+
+Gives you a *string* and outputs it. *Will not work with booleans or numbers*.
+
 `GIMME <x>`
 
 x should be a numeric expression or (TODO) a boolean comparison. Will give
 you it.
+
+### Conditionals and Loops
 
 `GIMME THE BELOW IF <TRUE/FALSE>`
 
@@ -68,9 +75,28 @@ These operations will take the last two things that have been gimme'd and
 apply the operation. The result will be what is gimme'd, i.e. placed in
 the program state. Both should be numbers; otherwise you will get an error.
 
-The order is Last Thing OP Thing Before That.
+The order is Last Thing OP Thing Before That. For example, if I gimme a 10 *then*
+a 20, the division operation will do 20 divided by 10.
+
+
+*Loops coming soon?*
+
+### Operations on Gimme'd Things
+
+`GIMME ADDITION WITH <n>`
+
+`GIMME SUBTRACTION WITH <n>`
+
+`GIMME MULTIPLICATION WITH <n>`
+
+`GIMME DIVISION WITH <n>`
+
+Does the requested binary op with n as the first operand and the last number
+that was gimme'd as the second operand.
 
 `GIMME OUTPUT`
+
+## Other Notes
 
 Prints to stdout the last thing you requested the program to give you.
 
@@ -78,5 +104,6 @@ Prints to stdout the last thing you requested the program to give you.
 purpose of the semi-colon is the stop the runtime from trying to parse the next
 thing as an argument of the thing that is possibly returned at the end of each
 line. Another way to get around this would be to put a new line between each
-line, but that makes the code ugly.
+line, but that makes the code ugly. There are some cases where you do not need to put
+a semi-colon, but I recommend you put one anyways.
 
