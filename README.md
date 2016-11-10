@@ -56,6 +56,20 @@ condition specified (true/false).
 
 End of Gimme's conditional construct. Marks the end of a conditional. 
 
+`GIMME ADDITION`
+
+`GIMME SUBTRACTION`
+
+`GIMME MULTIPLICATION`
+
+`GIMME DIVISION`
+
+These operations will take the last two things that have been gimme'd and
+apply the operation. The result will be what is gimme'd, i.e. placed in
+the program state. Both should be numbers; otherwise you will get an error.
+
+The order is Last Thing OP Thing Before That.
+
 `GIMME OUTPUT`
 
 Prints to stdout the last thing you requested the program to give you.
