@@ -12,6 +12,7 @@ object GimmeOpLines {
 
   case class GimmeString(str: String) extends GimmeOp
   case class GimmeStringRandom() extends GimmeOp
+  case class GimmeStringOutput(str: String) extends GimmeOp
 
   case class GimmeBool(bool: Boolean) extends GimmeOp
   case class GimmeBoolRandom() extends GimmeOp

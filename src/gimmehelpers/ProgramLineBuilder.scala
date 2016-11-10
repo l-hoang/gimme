@@ -91,6 +91,9 @@ class ProgramLineBuilder {
       case G_STRING_RANDOM =>
         lineToReturn = GimmeStringRandom()
 
+      case G_STRING_OUTPUT =>
+        lineToReturn = GimmeStringOutput(currentString)
+
       case G_BOOL =>
         lineToReturn = GimmeBool(currentBool)
 

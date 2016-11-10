@@ -111,6 +111,10 @@ class ProgramText {
           (rng.nextPrintableChar.toString) + (rng.nextPrintableChar.toString) + 
           (rng.nextPrintableChar.toString))
 
+        case GimmeStringOutput(str) => 
+          currentState setString str
+          currentState.output
+
         case GimmeBool(bool) => currentState setBool bool
 
         case GimmeBoolRandom() => currentState setBool rng.nextBoolean

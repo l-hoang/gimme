@@ -26,27 +26,23 @@ object SanityTest extends Gimme {
         GIMME ADDITION;
         GIMME OUTPUT;
 
-        GIMME A "should have been 50"
-        GIMME OUTPUT;
+        GIMME A "should have been 50" AND OUTPUT;
 
         GIMME ADDITION WITH NUMBER 1;
         GIMME OUTPUT;
 
-        GIMME A "should have been 51"
-        GIMME OUTPUT;
+        GIMME A "should have been 51" AND OUTPUT;
 
         // should be 1
         GIMME SUBTRACTION; 
         GIMME OUTPUT;
 
-        GIMME A "should have been 1"
-        GIMME OUTPUT;
+        GIMME A "should have been 1" AND OUPUT;
 
         GIMME SUBTRACTION WITH NUMBER -8
         // -9
         GIMME OUTPUT;
-        GIMME A "should have been -9"
-        GIMME OUTPUT;
+        GIMME A "should have been -9" AND OUTPUT;
 
         GIMME MULTIPLICATION;
         // -9

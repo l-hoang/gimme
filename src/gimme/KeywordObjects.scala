@@ -32,3 +32,7 @@ object BELOW extends BelowWord
 abstract sealed class WithWord
 object WITH extends WithWord
 
+// represents OUTPUT
+abstract sealed class OutputWord
+object OUTPUT extends OutputWord
+

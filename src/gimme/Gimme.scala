@@ -79,6 +79,16 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue s
       lineBuilder setOp OpEnums.G_STRING
+
+      StringContinue
+    }
+
+    /* if an AND is found, that means we should also print the string
+     * out after adding it to program state */
+    object StringContinue {
+      def AND(o: OutputWord) = {
+        lineBuilder setOp OpEnums.G_STRING_OUTPUT
+      }
     }
 
     //////////////
