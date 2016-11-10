@@ -92,6 +92,9 @@ class ProgramText {
       var lineJump = false
 
       currentLine match {
+        //////////////////
+        // Basic Gimmes //
+        //////////////////
         case GimmeNum(num) => currentState setNumber num
 
         case GimmeNumRandom() => currentState setNumber (rng nextInt 100)
@@ -112,6 +115,9 @@ class ProgramText {
 
         case GimmeBoolRandom() => currentState setBool rng.nextBoolean
 
+        /////////////////
+        // Conditional //
+        /////////////////
         case GimmeCondBegin(lineEnd, tOrF) =>
           // if condition is met, then we just go to the next line
           // otherwise we jump to the end of the line
@@ -124,23 +130,29 @@ class ProgramText {
 
         case GimmeCondEnd() => // do nothing, just a cond end line
 
-        // TODO binary ops
-        case GimmeAddition() =>
+        ////////////////
+        // Binary Ops //
+        ////////////////
 
-        case GimmeAdditionWith(num) =>
+        case GimmeAddition() => currentState.stackAddition
 
-        case GimmeSubtraction() =>
+        case GimmeAdditionWith(num) => currentState stackAddition num
 
-        case GimmeSubtractionWith(num) =>
+        case GimmeSubtraction() => currentState.stackSubtraction
 
-        case GimmeMultiplication() =>
+        case GimmeSubtractionWith(num) => currentState stackSubtraction num
 
-        case GimmeMultiplicationWith(num) =>
+        case GimmeMultiplication() => currentState.stackMultiplication
 
-        case GimmeDivision() =>
+        case GimmeMultiplicationWith(num) => currentState stackMultiplication num
+
+        case GimmeDivision() => currentState.stackDivision
         
-        case GimmeDivisionWith(num) =>
+        case GimmeDivisionWith(num) => currentState stackDivision num
 
+        ////////////
+        // Output //
+        ////////////
 
         case GimmeOutput() => currentState.output
 
