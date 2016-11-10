@@ -122,6 +122,13 @@ class Gimme {
       lineBuilder setOp OpEnums.G_BOOL
     }
 
+    /* allows for GIMME (1 > 3) or any other parenthesized Scala expression */
+    def apply(b: Boolean) = {
+      programText finishLine lineBuilder
+      lineBuilder setGimmeValue b
+      lineBuilder setOp OpEnums.G_BOOL
+    }
+
     /////////////////
     // Conditional //
     /////////////////
@@ -232,6 +239,7 @@ class Gimme {
   def RUN = {
     // finish last line
     programText finishLine lineBuilder
+    // run the program starting from the first GIMME line parsed
     programText runProgram currentState
   }
 }

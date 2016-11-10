@@ -18,8 +18,12 @@ object SanityTest extends Gimme {
         GIMME OUTPUT;
 
 
-        GIMME A "testing bin ops";
+        GIMME A "testing apply booleans" AND OUTPUT;
+        GIMME (100 > 100);
         GIMME OUTPUT;
+        GIMME A "should be false" AND OUTPUT;
+
+        GIMME A "testing bin ops" AND OUTPUT;
 
         GIMME A 30;
         GIMME A 20;
@@ -37,7 +41,7 @@ object SanityTest extends Gimme {
         GIMME SUBTRACTION; 
         GIMME OUTPUT;
 
-        GIMME A "should have been 1" AND OUPUT;
+        GIMME A "should have been 1" AND OUTPUT;
 
         GIMME SUBTRACTION WITH NUMBER -8
         // -9
