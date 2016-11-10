@@ -149,9 +149,20 @@ class Gimme {
     // Binary operations //
     ///////////////////////
 
+    /* What follows are binary operations that are done using the last 2
+     * elements that were gimme'd unless the WITH variant is used in which
+     * case 1 of the numbers used will be user provided. */
+
     def ADDITION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_ADDITION
+    }
+
+    def ADDITION(w: WithWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_ADDITION_WITH
+
+      BinContinue
     }
 
     def SUBTRACTION = {
@@ -159,14 +170,42 @@ class Gimme {
       lineBuilder setOp OpEnums.G_SUBTRACTION
     }
 
+    def SUBTRACTION(w: WithWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_SUBTRACTION_WITH
+
+      BinContinue
+    }
+
     def MULTIPLICATION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_MULTIPLICATION
     }
 
+    def MULTIPLICATION(w: WithWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_MULTIPLICATION_WITH
+
+      BinContinue
+    }
+
     def DIVISION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_DIVISION
+    }
+
+    def DIVISION(w: WithWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_DIVISION_WITH
+
+      BinContinue
+    }
+
+    /* continues parsing the OP WITH <number> line */
+    object BinContinue {
+      def NUMBER(num: Int) {
+        lineBuilder setGimmeValue num
+      }
     }
 
     ////////////
@@ -179,8 +218,6 @@ class Gimme {
       lineBuilder setOp OpEnums.G_OUTPUT
     }
   }
-
-
 
   def RUN = {
     // finish last line
