@@ -43,6 +43,30 @@ class GimmeStackObject {
     }
   }
 
+  def assertNumber = {
+    if (objectType != NumType) {
+      throw new RuntimeException("assertion failure: number")
+    }
+  }
+
+  def assertString = {
+    if (objectType != StringType) {
+      throw new RuntimeException("assertion failure: string")
+    }
+  }
+
+  def assertNotString = {
+    if (objectType == StringType) {
+      throw new RuntimeException("assertion failure: not string")
+    }
+  }
+
+  def assertBool = {
+    if (objectType != BoolType) {
+      throw new RuntimeException("assertion failure: bool")
+    }
+  }
+
   /////////////////////////
   // Object initializers //
   /////////////////////////
@@ -73,6 +97,43 @@ class GimmeStackObject {
   def getType = {
     assertInit
     objectType
+  }
+
+  /* return this object as a number (does not work for strings) */
+  def asNumber = {
+    assertInit
+    assertNotString
+
+    objectType match {
+      case NumType => num
+      case BoolType => if (bool) 1 else 0
+      case StringType => 
+        throw new RuntimeException("not string assertion didn't work")
+    }
+  }
+
+  /* return object as a string */
+  def asString = {
+    assertInit
+
+    objectType match {
+      case NumType => num.toString
+      case BoolType => bool.toString
+      case StringType => string
+    }
+  }
+
+  /* return the bool held by this object (doens't work for strings) */
+  def asBool = {
+    assertInit
+    assertNotString
+
+    objectType match {
+      case NumType => if (num == 0) false else true
+      case BoolType => true
+      case StringType => 
+        throw new RuntimeException("not string assertion didn't work")
+    }
   }
 
   /* outputs to stdout the element represented by this object */
@@ -147,11 +208,19 @@ class GimmeStack {
   /* prints the element at the top of the stack, i.e. the most recent 
    * element */
   def outputTop = {
-    if (programStack.isEmpty()) {
+    if (programStack.isEmpty) {
       throw new RuntimeException("trying to output when nothing gimme'd")
     }
 
     programStack.peekFirst.outputElement
+  }
+
+  def getFirst = {
+    if (programStack.isEmpty) {
+      throw new RuntimeException("trying to get first element when stack empty")
+    }
+
+    programStack.peekFirst
   }
 
   /* gets the second object in this stack */
