@@ -28,3 +28,7 @@ object ABOVE extends AboveWord
 abstract sealed class BelowWord
 object BELOW extends BelowWord
 
+// represents BELOW
+abstract sealed class WithWord
+object WITH extends WithWord
+

@@ -145,6 +145,29 @@ class Gimme {
       }
     }
 
+    ///////////////////////
+    // Binary operations //
+    ///////////////////////
+
+    def ADDITION = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_ADDITION
+    }
+
+    def SUBTRACTION = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_SUBTRACTION
+    }
+
+    def MULTIPLICATION = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_MULTIPLICATION
+    }
+
+    def DIVISION = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_DIVISION
+    }
 
     ////////////
     // Output //

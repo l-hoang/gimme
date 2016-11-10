@@ -19,5 +19,10 @@ object OpEnums {
   case object G_COND_BEGIN extends GimmeOpEnum
   case object G_COND_END extends GimmeOpEnum
 
+  case object G_ADDITION extends GimmeOpEnum
+  case object G_SUBTRACTION extends GimmeOpEnum
+  case object G_MULTIPLICATION extends GimmeOpEnum
+  case object G_DIVISION extends GimmeOpEnum
+
   case object G_OUTPUT extends GimmeOpEnum
 }
