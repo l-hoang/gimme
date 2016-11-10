@@ -17,7 +17,45 @@ object SanityTest extends Gimme {
         GIMME A NUMBER BETWEEN 100 AND 110;
         GIMME OUTPUT;
 
+
+        GIMME A "testing bin ops";
+        GIMME OUTPUT;
+
         GIMME A 30;
+        GIMME OUTPUT;
+
+        GIMME A 20;
+        GIMME ADDITION;
+        GIMME OUTPUT;
+
+        GIMME ADDITION WITH NUMBER 1;
+        GIMME OUTPUT;
+
+        // should be 1
+        GIMME SUBTRACTION; 
+        GIMME OUTPUT;
+
+        GIMME SUBTRACTION WITH NUMBER -8
+        // -9
+        GIMME OUTPUT;
+
+        GIMME MULTIPLICATION;
+        // -9
+        GIMME OUTPUT;
+
+        GIMME MULTIPLICATION WITH NUMBER 3;
+        // -27
+        GIMME OUTPUT;
+
+        GIMME DIVISION;
+        // 3
+        GIMME OUTPUT;
+
+        GIMME DIVISION WITH NUMBER 3;
+        // 1
+        GIMME OUTPUT;
+
+        GIMME A "testing bin ops complete";
         GIMME OUTPUT;
 
         GIMME A "lol";
