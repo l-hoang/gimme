@@ -162,6 +162,33 @@ class Gimme {
       }
     }
 
+    /////////////////
+    // Comparators //
+    /////////////////
+
+
+    //////////////////
+    // Loop (While) //
+    //////////////////
+
+    /* beginning of loop end or beginning */
+    def CONTINUOUSLY(t: TheWord) = {
+      programText finishLine lineBuilder
+      LoopBelowOrAbove
+    }
+
+    object LoopBelowOrAbove {
+      /* loop beginning */
+      def BELOW = {
+        lineBuilder setOp OpEnums.G_LOOP_BEGIN
+      }
+
+      /* loop end */
+      def ABOVE = {
+        lineBuilder setOp OpEnums.G_LOOP_END
+      }
+    }
+
     ///////////////////////
     // Binary operations //
     ///////////////////////

@@ -81,6 +81,14 @@ a 20, the division operation will do 20 divided by 10.
 
 *Loops coming soon?*
 
+`GIMME CONTINUOUSLY THE BELOW`
+
+Marks the beginning of a while loop.
+
+`GIMME CONTINUOUSLY THE ABOVE`
+
+Marks the end of a while loop.
+
 ### Operations on Gimme'd Things
 
 `GIMME ADDITION WITH <n>`

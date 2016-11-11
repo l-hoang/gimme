@@ -36,3 +36,6 @@ object WITH extends WithWord
 abstract sealed class OutputWord
 object OUTPUT extends OutputWord
 
+// represents THE
+abstract sealed class TheWord
+object THE extends TheWord
