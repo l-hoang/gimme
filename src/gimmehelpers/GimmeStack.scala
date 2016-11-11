@@ -252,32 +252,6 @@ class GimmeStack {
     toReturn
   }
 
-  def getFirst = {
-    if (programStack.isEmpty) {
-      throw new RuntimeException("trying to get first element when stack empty")
-    }
-
-    programStack.peekFirst
-  }
-
-  /* gets the second object in this stack */
-  def getSecond = {
-    if (programStack.size < 2) {
-      throw new RuntimeException("can't do a binary op without 2 things on stack")
-    }
-
-    // temp pop the first element
-    val topElement = programStack.pop
-    // grab second element (now the first 1)
-    val secondElement = programStack.peekFirst
-
-    // push back
-    programStack push topElement
-
-    // return
-    secondElement
-  }
-
   /* returns the last bool that was added to this stack */
   def getLastBool = lastBool
 }
