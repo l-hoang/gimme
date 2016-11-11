@@ -23,8 +23,10 @@ class ProgramText {
   val rng = new Random()
   val gimmeLines = new HashMap[Int, GimmeOp]
 
-  // holds conditional beginning line numbers
+  // holds current conditional beginning line numbers
   val conditionalStack = new ArrayDeque[Int]
+  // holds current loop beginning line numbers
+  val loopStack = new ArrayDeque[Int]
 
   ///////////////////////////
   // Line adding functions //
@@ -43,6 +45,10 @@ class ProgramText {
     line match {
       case GimmeNone => // do nothing
 
+      ///////////////////////
+      // Conditional lines //
+      ///////////////////////
+
       case GimmeCondBegin(_, _) => 
         // push current line onto cond stack, then add the line
         conditionalStack push currentLineNumber
@@ -58,6 +64,29 @@ class ProgramText {
         
         // add the cond end
         addLine(line)
+
+      ////////////////
+      // Loop lines //
+      ////////////////
+
+      case GimmeLoopBegin(_) => 
+        // push current line onto loop stack, then add the line
+        loopStack push currentLineNumber
+        addLine(line)
+
+      case GimmeLoopEnd() => 
+        // create an updated loop beginning (will hold end line), add into the map
+        val loopBegin = loopStack.pop
+        val oldLoopLine = gimmeLines(loopBegin).asInstanceOf[GimmeLoopBegin]
+
+        gimmeLines.put(loopBegin, GimmeLoopBegin(currentLineNumber))
+        
+        // add the loop end
+        addLine(line)
+
+      /////////////////////
+      // Everything else //
+      /////////////////////
 
       case _ => addLine(line)
     }
