@@ -109,6 +109,12 @@ class ProgramLineBuilder {
       case G_COND_END =>
         lineToReturn = GimmeCondEnd()
 
+      case G_LOOP_BEGIN =>
+        lineToReturn = GimmeLoopBegin(-1)
+
+      case G_LOOP_END =>
+        lineToReturn = GimmeLoopEnd()
+
       case G_ADDITION =>
         lineToReturn = GimmeAddition()
 
