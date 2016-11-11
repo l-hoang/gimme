@@ -69,20 +69,14 @@ class ProgramText {
       // Loop lines //
       ////////////////
 
-      case GimmeLoopBegin(_) => 
+      case GimmeLoopBegin() => 
         // push current line onto loop stack, then add the line
         loopStack push currentLineNumber
         addLine(line)
 
-      case GimmeLoopEnd() => 
-        // create an updated loop beginning (will hold end line), add into the map
-        val loopBegin = loopStack.pop
-        val oldLoopLine = gimmeLines(loopBegin).asInstanceOf[GimmeLoopBegin]
-
-        gimmeLines.put(loopBegin, GimmeLoopBegin(currentLineNumber))
-        
-        // add the loop end
-        addLine(line)
+      case GimmeLoopEnd(_) => 
+        // grab the beginning of the loop to save to this loop end
+        addLine(GimmeLoopEnd(loopStack.pop))
 
       /////////////////////
       // Everything else //
@@ -162,6 +156,23 @@ class ProgramText {
           }
 
         case GimmeCondEnd() => // do nothing, just a cond end line
+
+        //////////
+        // Loop //
+        //////////
+        // TODO
+        //case GimmeCondBegin(lineEnd, tOrF) =>
+        //  // if condition is met, then we just go to the next line
+        //  // otherwise we jump to the end of the line
+        //  if (currentState.getBool != tOrF) {
+        //    // jump to end of condition
+        //    runtimeLineNumber = lineEnd
+        //    // set this so we don't increment the line
+        //    lineJump = true
+        //  }
+
+        //case GimmeCondEnd() => // do nothing, just a cond end line
+
 
         ////////////////
         // Binary Ops //
