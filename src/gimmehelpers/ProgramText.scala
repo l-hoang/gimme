@@ -28,7 +28,7 @@ class ProgramText {
   // holds current loop beginning line numbers
   val loopStack = new ArrayDeque[Int]
   // holds all breaks (line numbers) that exist in a loop (for later update)
-  val breakStack = new HashMap[Int, Array[Int]]
+  val breakStack = new HashMap[Int, ArrayDeque[Int]]
 
   ///////////////////////////
   // Line adding functions //
@@ -72,16 +72,31 @@ class ProgramText {
       ////////////////
 
       case GimmeLoopBegin(_) => 
-        // push current line onto loop stack, then add the line
+        // push current line onto loop stack
         loopStack push currentLineNumber
+
+        // create a "queue" for breaks
+        breakStack.put(currentLineNumber, new ArrayDeque) 
+
+        // add the line
         addLine(line)
 
       case GimmeLoopEnd(_) => 
         val loopBegin = loopStack.pop
+        val jumpPoint = currentLineNumber + 1
 
         // replace old loop begin with updated version that has the
         // line after the end of the loop
-        gimmeLines.put(loopBegin, GimmeLoopBegin(currentLineNumber + 1))
+        gimmeLines.put(loopBegin, GimmeLoopBegin(jumpPoint))
+
+        // go back and update all the break lines on the queue
+        val queueBreaks = breakStack(loopBegin).iterator 
+        // replace the break line we added before with an updated one that
+        // has the line to jump to on break
+        while (queueBreaks.hasNext) {
+          gimmeLines.put(queueBreaks.next, GimmeBreak(jumpPoint))
+        }
+
         // save loop end with beginning of loop 
         addLine(GimmeLoopEnd(loopBegin))
 
@@ -90,9 +105,10 @@ class ProgramText {
       ///////////
 
       case GimmeBreak(_) =>
-        // TODO figure out how to deal with breaks
-
-
+        // push our line onto the "to handle" stack for this loop
+        breakStack(loopStack.peek) push currentLineNumber
+        // add line (will be changed later)
+        addLine(line)
 
       /////////////////////
       // Everything else //
@@ -189,8 +205,9 @@ class ProgramText {
         // Break //
         ///////////
 
-        case GimmeBreak(_) => // TODO
-
+        case GimmeBreak(jumpLocation) => 
+          runtimeLineNumber = jumpLocation
+          lineJump = true
 
         ////////////////
         // Binary Ops //

@@ -194,6 +194,7 @@ class Gimme {
     //////////////////
 
     def AN(e: ExitWord) = {
+        programText finishLine lineBuilder
         lineBuilder setOp OpEnums.G_BREAK
     }
 
