@@ -94,7 +94,20 @@ class ProgramText {
         // replace the break line we added before with an updated one that
         // has the line to jump to on break
         while (queueBreaks.hasNext) {
-          gimmeLines.put(queueBreaks.next, GimmeBreak(jumpPoint))
+          val lineToCheck = queueBreaks.next
+          val oldLine = gimmeLines(lineToCheck)
+
+          oldLine match {
+            case GimmeBreak(_) => 
+              gimmeLines.put(lineToCheck, GimmeBreak(jumpPoint))
+            case GimmeBreakTrue(_) =>
+              gimmeLines.put(lineToCheck, GimmeBreakTrue(jumpPoint))
+            case GimmeBreakFalse(_) =>
+              gimmeLines.put(lineToCheck, GimmeBreakFalse(jumpPoint))
+            case _ =>
+              throw new RuntimeException("line in break stack should be a " +
+                                         "break line")
+          }
         }
 
         // save loop end with beginning of loop 
@@ -108,6 +121,15 @@ class ProgramText {
         // push our line onto the "to handle" stack for this loop
         breakStack(loopStack.peek) push currentLineNumber
         // add line (will be changed later)
+        addLine(line)
+
+      /* following 2 same as above for breaks (just adding diff line type) */
+      case GimmeBreakTrue(_) =>
+        breakStack(loopStack.peek) push currentLineNumber
+        addLine(line)
+
+      case GimmeBreakFalse(_) =>
+        breakStack(loopStack.peek) push currentLineNumber
         addLine(line)
 
       /////////////////////
@@ -208,6 +230,20 @@ class ProgramText {
         case GimmeBreak(jumpLocation) => 
           runtimeLineNumber = jumpLocation
           lineJump = true
+
+        case GimmeBreakTrue(jumpLocation) => 
+          // only jump if true else do nothing
+          if (currentState.getBool) {
+            runtimeLineNumber = jumpLocation
+            lineJump = true
+          }
+
+        case GimmeBreakFalse(jumpLocation) => 
+          // only jump if false else do nothing
+          if (currentState.getBool) {
+            runtimeLineNumber = jumpLocation
+            lineJump = true
+          }
 
         ////////////////
         // Binary Ops //
