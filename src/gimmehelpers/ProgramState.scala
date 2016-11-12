@@ -6,6 +6,11 @@ class ProgramState {
   // program stack
   val gimmeStack = new GimmeStack
 
+  // holds current conditional beginning line numbers
+  val conditionalStack = new ArrayDeque[Int]
+  // holds current loop beginning line numbers
+  val loopStack = new ArrayDeque[Int]
+
   ///////////////////
   // State setters //
   ///////////////////
@@ -27,6 +32,19 @@ class ProgramState {
 
   /* Get the current bool (i.e. the last bool object that was gimme'd */
   def getBool = gimmeStack.getLastBool
+
+
+  /////////////////////////////////////////
+  // Metadata things for program running //
+  /////////////////////////////////////////
+
+  /* push/pop for loop line numbers */
+  def pushLoopStack(lineNumber: Int) = loopStack push lineNumber
+  def popLoopStack = loopStack.pop
+
+  /* push/pop for cond line numbers */
+  def pushCondStack(lineNumber: Int) = conditionalStack push lineNumber
+  def popCondStack = conditionalStack.pop
 
   ////////////////
   // Binary Ops //
