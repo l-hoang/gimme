@@ -101,11 +101,15 @@ object SanityTest extends Gimme {
         GIMME OUTPUT;
         GIMME THE ABOVE;
 
-        //GIMME CONTINUOUSLY THE BELOW;
+        GIMME A 30;
+
+        GIMME CONTINUOUSLY THE BELOW;
         //GIMME AN EXIT IF FALSE;
         //GIMME AN EXIT IF TRUE;
         //GIMME AN EXIT;
-        //GIMME CONINUOUSLY THE ABOVE;
+        GIMME ADDITION WITH NUMBER -1;
+        GIMME OUTPUT;
+        GIMME CONTINUOUSLY THE ABOVE;
 
         RUN;
     }
