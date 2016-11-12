@@ -24,6 +24,8 @@ object OpEnums {
   case object G_LOOP_END extends GimmeOpEnum
 
   case object G_BREAK extends GimmeOpEnum
+  case object G_BREAK_TRUE extends GimmeOpEnum
+  case object G_BREAK_FALSE extends GimmeOpEnum
 
   case object G_ADDITION extends GimmeOpEnum
   case object G_ADDITION_WITH extends GimmeOpEnum

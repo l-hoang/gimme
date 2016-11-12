@@ -193,9 +193,18 @@ class Gimme {
     // Loop (Break) //
     //////////////////
 
+    /* parses a break statement construct */
     def AN(e: ExitWord) = {
         programText finishLine lineBuilder
         lineBuilder setOp OpEnums.G_BREAK
+
+        BreakContinue
+    }
+
+    /* continuation for the break statement for true/false variants */
+    object BreakContinue {
+      def IF(t: TrueWord) = lineBuilder setOp OpEnums.G_BREAK_TRUE
+      def IF(t: FalseWord) = lineBuilder setOp OpEnums.G_BREAK_FALSE
     }
 
     ///////////////////////
