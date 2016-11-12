@@ -111,7 +111,8 @@ object SanityTest extends Gimme {
         GIMME ADDITION WITH NUMBER -1;
         GIMME OUTPUT;
 
-        GIMME AN EXIT IF TRUE;
+        // should exit, false above
+        GIMME AN EXIT IF FALSE;
         GIMME CONTINUOUSLY THE ABOVE;
 
         RUN;

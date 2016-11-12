@@ -240,7 +240,7 @@ class ProgramText {
 
         case GimmeBreakFalse(jumpLocation) => 
           // only jump if false else do nothing
-          if (currentState.getBool) {
+          if (!currentState.getBool) {
             runtimeLineNumber = jumpLocation
             lineJump = true
           }
