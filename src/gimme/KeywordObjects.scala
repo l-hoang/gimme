@@ -44,3 +44,11 @@ object THE extends TheWord
 abstract sealed class ExitWord
 object EXIT extends ExitWord
 
+// represents THAN
+abstract sealed class ThanWord
+object THAN extends ThanWord
+
+// represents TO
+abstract sealed class ToWord
+object TO extends ToWord
+

@@ -20,6 +20,18 @@ object OpEnums {
   case object G_COND_BEGIN extends GimmeOpEnum
   case object G_COND_END extends GimmeOpEnum
 
+  case object G_GREATER extends GimmeOpEnum
+  case object G_GREATER_EQUAL extends GimmeOpEnum
+  case object G_LESS extends GimmeOpEnum
+  case object G_LESS_EQUAL extends GimmeOpEnum
+  case object G_EQUAL extends GimmeOpEnum
+
+  case object G_GREATER_N extends GimmeOpEnum
+  case object G_GREATER_EQUAL_N extends GimmeOpEnum
+  case object G_LESS_N extends GimmeOpEnum
+  case object G_LESS_EQUAL_N extends GimmeOpEnum
+  case object G_EQUAL_N extends GimmeOpEnum
+
   case object G_LOOP_BEGIN extends GimmeOpEnum
   case object G_LOOP_END extends GimmeOpEnum
 
@@ -35,6 +47,8 @@ object OpEnums {
   case object G_MULTIPLICATION_WITH extends GimmeOpEnum
   case object G_DIVISION extends GimmeOpEnum
   case object G_DIVISION_WITH extends GimmeOpEnum
+
+  case object G_NEGATION extends GimmeOpEnum
 
   case object G_OUTPUT extends GimmeOpEnum
 }

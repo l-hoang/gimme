@@ -20,6 +20,9 @@ class ProgramLineBuilder {
     currentOp = newOp
   }
 
+  /* returns the currently set op */
+  def getOp = currentOp
+
 
   ///////////////////////////////////////
   // Setters for what has been gimme'd //

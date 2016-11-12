@@ -166,6 +166,56 @@ class Gimme {
     // Comparators //
     /////////////////
 
+    def GREATER(t: ThanWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_GREATER
+
+      compareContinue
+    }
+
+    def LESS(t: ThanWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_LESS
+
+      compareContinue
+    }
+
+    def EQUAL(t: ToWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_EQUAL
+
+      compareContinue
+    }
+
+    object compareContinue {
+      def EQUAL(t: ToWord) = {
+        lineBuilder.getOp match {
+          case OpEnums.G_GREATER => lineBuilder setOp OpEnums.G_GREATER_EQUAL
+          case OpEnums.G_LESS => lineBuilder setOp OpEnums.G_LESS_EQUAL
+          case _ =>
+            throw new RuntimeException("comparator EQUAL TO continues greater " +
+                                       "than or less than only")
+        }
+
+        compareContinue
+      }
+
+      def NUMBER(num: Int) = {
+        lineBuilder setGimmeValue num
+
+        lineBuilder.getOp match {
+          case OpEnums.G_GREATER => lineBuilder setOp OpEnums.G_GREATER_N
+          case OpEnums.G_LESS => lineBuilder setOp OpEnums.G_LESS_N
+          case OpEnums.G_GREATER_EQUAL => 
+            lineBuilder setOp OpEnums.G_GREATER_EQUAL_N
+          case OpEnums.G_LESS_EQUAL => lineBuilder setOp OpEnums.G_LESS_EQUAL_N
+          case OpEnums.G_EQUAL => lineBuilder setOp OpEnums.G_EQUAL_N
+          case _ =>
+            throw new RuntimeException("in comparator parse; only takes compare "+
+                                       "ops")
+        }
+      }
+    }
 
     //////////////////
     // Loop (While) //
