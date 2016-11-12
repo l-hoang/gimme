@@ -27,6 +27,8 @@ class ProgramText {
   val conditionalStack = new ArrayDeque[Int]
   // holds current loop beginning line numbers
   val loopStack = new ArrayDeque[Int]
+  // holds all breaks (line numbers) that exist in a loop (for later update)
+  val breakStack = new HashMap[Int, Array[Int]]
 
   ///////////////////////////
   // Line adding functions //
@@ -82,6 +84,15 @@ class ProgramText {
         gimmeLines.put(loopBegin, GimmeLoopBegin(currentLineNumber + 1))
         // save loop end with beginning of loop 
         addLine(GimmeLoopEnd(loopBegin))
+
+      ///////////
+      // Break //
+      ///////////
+
+      case GimmeBreak(_) =>
+        // TODO figure out how to deal with breaks
+
+
 
       /////////////////////
       // Everything else //
@@ -150,6 +161,7 @@ class ProgramText {
         /////////////////
         // Conditional //
         /////////////////
+
         case GimmeCondBegin(lineEnd, tOrF) =>
           // if condition is met, then we just go to the next line
           // otherwise we jump to the end of the line
@@ -165,12 +177,19 @@ class ProgramText {
         //////////
         // Loop //
         //////////
+
         case GimmeLoopBegin(_) => // do nothing; just a marker
 
         case GimmeLoopEnd(lineLoopBeginning) => 
           // jump to beginning of loop
           runtimeLineNumber = lineLoopBeginning
           lineJump = true
+
+        ///////////
+        // Break //
+        ///////////
+
+        case GimmeBreak(_) => // TODO
 
 
         ////////////////

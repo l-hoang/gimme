@@ -24,7 +24,7 @@ object GimmeOpLines {
   case class GimmeLoopBegin(lineAfterLoop: Int) extends GimmeOp
   case class GimmeLoopEnd(loopLineBeginning: Int) extends GimmeOp
 
-  case class GimmeBreak() extends GimmeOp
+  case class GimmeBreak(breakLine: Int) extends GimmeOp
 
   case class GimmeAddition() extends GimmeOp
   case class GimmeAdditionWith(num: Int) extends GimmeOp
