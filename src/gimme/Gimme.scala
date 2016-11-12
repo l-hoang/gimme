@@ -189,6 +189,14 @@ class Gimme {
       }
     }
 
+    //////////////////
+    // Loop (Break) //
+    //////////////////
+
+    def AN(e: ExitWord) = {
+        lineBuilder setOp OpEnums.G_BREAK
+    }
+
     ///////////////////////
     // Binary operations //
     ///////////////////////

@@ -39,3 +39,8 @@ object OUTPUT extends OutputWord
 // represents THE
 abstract sealed class TheWord
 object THE extends TheWord
+
+// represents EXIT
+abstract sealed class ExitWord
+object EXIT extends ExitWord
+
