@@ -23,6 +23,8 @@ object OpEnums {
   case object G_LOOP_BEGIN extends GimmeOpEnum
   case object G_LOOP_END extends GimmeOpEnum
 
+  case object G_BREAK extends GimmeOpEnum
+
   case object G_ADDITION extends GimmeOpEnum
   case object G_ADDITION_WITH extends GimmeOpEnum
   case object G_SUBTRACTION extends GimmeOpEnum
