@@ -76,76 +76,58 @@ class ProgramLineBuilder {
     var lineToReturn: GimmeOp = GimmeNone
 
     currentOp match {
-      case G_NUMBER =>
-        lineToReturn = GimmeNum(currentNumber)
+      case G_NUMBER => lineToReturn = GimmeNum(currentNumber)
 
-      case G_NUMBER_RANDOM =>
-        lineToReturn = GimmeNumRandom()
+      case G_NUMBER_RANDOM => lineToReturn = GimmeNumRandom()
 
-      case G_NUMBER_RANGE =>
-        lineToReturn = GimmeNumRange(low, high)
+      case G_NUMBER_RANGE => lineToReturn = GimmeNumRange(low, high)
 
-      case G_STRING =>
-        lineToReturn = GimmeString(currentString)
+      case G_STRING => lineToReturn = GimmeString(currentString)
 
-      case G_STRING_RANDOM =>
-        lineToReturn = GimmeStringRandom()
+      case G_STRING_RANDOM => lineToReturn = GimmeStringRandom()
 
-      case G_STRING_OUTPUT =>
-        lineToReturn = GimmeStringOutput(currentString)
+      case G_STRING_OUTPUT => lineToReturn = GimmeStringOutput(currentString)
 
-      case G_BOOL =>
-        lineToReturn = GimmeBool(currentBool)
+      case G_BOOL => lineToReturn = GimmeBool(currentBool)
 
-      case G_BOOL_RANDOM =>
-        lineToReturn = GimmeBoolRandom()
+      case G_BOOL_RANDOM => lineToReturn = GimmeBoolRandom()
 
-      case G_OUTPUT =>
-        lineToReturn = GimmeOutput()
+      case G_OUTPUT => lineToReturn = GimmeOutput()
 
-      case G_COND_BEGIN =>
-        lineToReturn = GimmeCondBegin(-1, condBool)
+      case G_COND_BEGIN => lineToReturn = GimmeCondBegin(-1, condBool)
 
-      case G_COND_END =>
-        lineToReturn = GimmeCondEnd()
+      case G_COND_END => lineToReturn = GimmeCondEnd()
 
-      case G_LOOP_BEGIN =>
-        lineToReturn = GimmeLoopBegin()
+      case G_LOOP_BEGIN => lineToReturn = GimmeLoopBegin()
 
-      case G_LOOP_END =>
-        lineToReturn = GimmeLoopEnd(-1)
+      case G_LOOP_END => lineToReturn = GimmeLoopEnd(-1)
 
-      case G_ADDITION =>
-        lineToReturn = GimmeAddition()
+      case G_BREAK => lineToReturn = GimmeBreak()
 
-      case G_ADDITION_WITH =>
-        lineToReturn = GimmeAdditionWith(currentNumber)
+      case G_ADDITION => lineToReturn = GimmeAddition()
 
-      case G_SUBTRACTION =>
-        lineToReturn = GimmeSubtraction()
+      case G_ADDITION_WITH => lineToReturn = GimmeAdditionWith(currentNumber)
 
-      case G_SUBTRACTION_WITH =>
+      case G_SUBTRACTION => lineToReturn = GimmeSubtraction()
+
+      case G_SUBTRACTION_WITH => 
         lineToReturn = GimmeSubtractionWith(currentNumber)
 
-      case G_MULTIPLICATION =>
-        lineToReturn = GimmeMultiplication()
+      case G_MULTIPLICATION => lineToReturn = GimmeMultiplication()
 
-      case G_MULTIPLICATION_WITH =>
+      case G_MULTIPLICATION_WITH => 
         lineToReturn = GimmeMultiplicationWith(currentNumber)
 
-      case G_DIVISION =>
-        lineToReturn = GimmeDivision()
+      case G_DIVISION => lineToReturn = GimmeDivision()
 
-      case G_DIVISION_WITH =>
-        lineToReturn = GimmeDivisionWith(currentNumber)
+      case G_DIVISION_WITH => lineToReturn = GimmeDivisionWith(currentNumber)
 
       case G_NONE =>
-        if (!firstLine) {
+        if (!firstLine)
           throw new RuntimeException("Adding an empty line")
-        } else {
+        else
           // first line meaning nothing supposed to be there
           firstLine = false
-        }
     }
 
     // reset everything in prep for next line
