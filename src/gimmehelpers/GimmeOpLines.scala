@@ -21,6 +21,17 @@ object GimmeOpLines {
                             trueOrFalse: Boolean) extends GimmeOp
   case class GimmeCondEnd() extends GimmeOp
 
+  case class GimmeGreater() extends GimmeOp
+  case class GimmeGreaterEqual() extends GimmeOp
+  case class GimmeLess() extends GimmeOp
+  case class GimmeLessEqual() extends GimmeOp
+  case class GimmeEqual() extends GimmeOp
+  case class GimmeGreaterNum(num: Int) extends GimmeOp
+  case class GimmeGreaterEqualNum(num: Int) extends GimmeOp
+  case class GimmeLessNum(num: Int) extends GimmeOp
+  case class GimmeLessEqualNum(num: Int) extends GimmeOp
+  case class GimmeEqualNum(num: Int) extends GimmeOp
+
   case class GimmeLoopBegin(lineAfterLoop: Int) extends GimmeOp
   case class GimmeLoopEnd(loopLineBeginning: Int) extends GimmeOp
 

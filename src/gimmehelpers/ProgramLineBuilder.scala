@@ -95,6 +95,18 @@ class ProgramLineBuilder {
       case G_COND_BEGIN => lineToReturn = GimmeCondBegin(-1, condBool)
       case G_COND_END => lineToReturn = GimmeCondEnd()
 
+      case G_GREATER => lineToReturn = GimmeGreater()
+      case G_GREATER_EQUAL => lineToReturn = GimmeGreaterEqual()
+      case G_LESS => lineToReturn = GimmeLess()
+      case G_LESS_EQUAL => lineToReturn = GimmeLessEqual()
+      case G_EQUAL => lineToReturn = GimmeEqual()
+
+      case G_GREATER_N => lineToReturn = GimmeGreaterNum(currentNumber)
+      case G_GREATER_EQUAL_N => lineToReturn = GimmeGreaterEqualNum(currentNumber)
+      case G_LESS_N => lineToReturn = GimmeLessNum(currentNumber)
+      case G_LESS_EQUAL_N => lineToReturn = GimmeLessEqualNum(currentNumber)
+      case G_EQUAL_N => lineToReturn = GimmeEqualNum(currentNumber)
+
       case G_LOOP_BEGIN => lineToReturn = GimmeLoopBegin(-1)
       case G_LOOP_END => lineToReturn = GimmeLoopEnd(-1)
 
