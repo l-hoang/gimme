@@ -160,18 +160,12 @@ class ProgramText {
         //////////
         // Loop //
         //////////
-        // TODO
-        //case GimmeCondBegin(lineEnd, tOrF) =>
-        //  // if condition is met, then we just go to the next line
-        //  // otherwise we jump to the end of the line
-        //  if (currentState.getBool != tOrF) {
-        //    // jump to end of condition
-        //    runtimeLineNumber = lineEnd
-        //    // set this so we don't increment the line
-        //    lineJump = true
-        //  }
+        case GimmeLoopBegin() => // do nothing; just a marker
 
-        //case GimmeCondEnd() => // do nothing, just a cond end line
+        case GimmeLoopEnd(lineLoopBeginning) => 
+          // jump to beginning of loop
+          runtimeLineNumber = lineLoopBeginning
+          lineJump = true
 
 
         ////////////////
