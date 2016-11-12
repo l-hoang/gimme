@@ -87,7 +87,7 @@ class ProgramLineBuilder {
       case G_OUTPUT => lineToReturn = GimmeOutput()
       case G_COND_BEGIN => lineToReturn = GimmeCondBegin(-1, condBool)
       case G_COND_END => lineToReturn = GimmeCondEnd()
-      case G_LOOP_BEGIN => lineToReturn = GimmeLoopBegin()
+      case G_LOOP_BEGIN => lineToReturn = GimmeLoopBegin(-1)
       case G_LOOP_END => lineToReturn = GimmeLoopEnd(-1)
       case G_BREAK => lineToReturn = GimmeBreak()
       case G_ADDITION => lineToReturn = GimmeAddition()

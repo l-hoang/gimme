@@ -69,14 +69,19 @@ class ProgramText {
       // Loop lines //
       ////////////////
 
-      case GimmeLoopBegin() => 
+      case GimmeLoopBegin(_) => 
         // push current line onto loop stack, then add the line
         loopStack push currentLineNumber
         addLine(line)
 
       case GimmeLoopEnd(_) => 
-        // grab the beginning of the loop to save to this loop end
-        addLine(GimmeLoopEnd(loopStack.pop))
+        val loopBegin = loopStack.pop
+
+        // replace old loop begin with updated version that has the
+        // line after the end of the loop
+        gimmeLines.put(loopBegin, GimmeLoopBegin(currentLineNumber + 1))
+        // save loop end with beginning of loop 
+        addLine(GimmeLoopEnd(loopBegin))
 
       /////////////////////
       // Everything else //
@@ -160,7 +165,7 @@ class ProgramText {
         //////////
         // Loop //
         //////////
-        case GimmeLoopBegin() => // do nothing; just a marker
+        case GimmeLoopBegin(_) => // do nothing; just a marker
 
         case GimmeLoopEnd(lineLoopBeginning) => 
           // jump to beginning of loop
