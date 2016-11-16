@@ -155,17 +155,21 @@ object SanityTest extends Gimme {
         GIMME NEGATION;
         GIMME OUTPUT; // 20
 
-        //GIMME CONTINUOUSLY THE BELOW;
-        ////GIMME AN EXIT IF FALSE;
-        ////GIMME AN EXIT IF TRUE;
-        //GIMME A "lol here" AND OUTPUT;
+        GIMME A 1;
 
-        //GIMME ADDITION WITH NUMBER -1;
-        //GIMME OUTPUT;
+        GIMME CONTINUOUSLY THE BELOW;
+        GIMME A "lol here" AND OUTPUT;
 
-        //// should exit, false above
-        //GIMME AN EXIT IF FALSE;
-        //GIMME CONTINUOUSLY THE ABOVE;
+        GIMME CONTINUOUSLY THE BELOW;
+        GIMME A "print once" AND OUTPUT;
+        GIMME AN EXIT;
+        GIMME CONTINUOUSLY THE ABOVE;
+
+        GIMME ADDITION WITH NUMBER 1;
+
+        GIMME LESS THAN EQUAL TO NUMBER 5;
+        GIMME AN EXIT IF TRUE;
+        GIMME CONTINUOUSLY THE ABOVE;
 
         RUN;
     }

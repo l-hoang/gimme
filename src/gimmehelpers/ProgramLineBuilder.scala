@@ -23,7 +23,6 @@ class ProgramLineBuilder {
   /* returns the currently set op */
   def getOp = currentOp
 
-
   ///////////////////////////////////////
   // Setters for what has been gimme'd //
   ///////////////////////////////////////
@@ -68,7 +67,6 @@ class ProgramLineBuilder {
   def conditionalFalseSet = {
     condBool = false
   }
-
 
   //////////////////////////////////////
   // Line builder returns a line here //
