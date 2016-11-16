@@ -129,6 +129,8 @@ class Gimme {
       lineBuilder setOp OpEnums.G_BOOL
     }
 
+    /* TODO add TRUE/FALSE? */
+
     /////////////////
     // Conditional //
     /////////////////
