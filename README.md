@@ -86,29 +86,29 @@ was true/false.
 
 ### Comparators
 
-`GIMME GREATER THAN'
+`GIMME GREATER THAN`
 
-`GIMME GREATER THAN EQUAL TO'
+`GIMME GREATER THAN EQUAL TO`
 
-`GIMME LESS THAN'
+`GIMME LESS THAN`
 
-`GIMME LESS THAN EQUAL TO'
+`GIMME LESS THAN EQUAL TO`
 
-`GIMME EQUAL TO'
+`GIMME EQUAL TO`
 
 Takes the last 2 numbers on the stack and compares them. The top number x1 is on
 the left, the latter number x2 (i.e. below x1 on stack) is on the right, 
 e.g. x1 > x2.
 
-`GIMME GREATER THAN NUMBER <n>'
+`GIMME GREATER THAN NUMBER <n>`
 
-`GIMME GREATER THAN EQUAL TO NUMBER <n>'
+`GIMME GREATER THAN EQUAL TO NUMBER <n>`
 
-`GIMME LESS THAN NUMBER <n>'
+`GIMME LESS THAN NUMBER <n>`
 
-`GIMME LESS THAN EQUAL TO NUMBER <n>'
+`GIMME LESS THAN EQUAL TO NUMBER <n>`
 
-`GIMME EQUAL TO NUMBER <n>'
+`GIMME EQUAL TO NUMBER <n>`
 
 Compares the number you give it with the top number on the stack. Note
 the number you give it will be on the left, e.g. n > x1. (x1 is the 
@@ -154,9 +154,10 @@ to be pushed.
 
 `GIMME OUTPUT`
 
+Prints to stdout the last thing you requested the program to give you.
+
 ## Other Notes
 
-Prints to stdout the last thing you requested the program to give you.
 
 **Note that all lines should end with a semi-colon or bad things might happen**. The
 purpose of the semi-colon is the stop the runtime from trying to parse the next
