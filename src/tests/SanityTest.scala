@@ -102,18 +102,55 @@ object SanityTest extends Gimme {
         GIMME THE ABOVE;
 
         GIMME A 30;
+        GIMME A 31;
+        
+        GIMME A "LOL TEST" AND OUTPUT;
 
-        GIMME CONTINUOUSLY THE BELOW;
-        //GIMME AN EXIT IF FALSE;
-        //GIMME AN EXIT IF TRUE;
-        GIMME A "lol here" AND OUTPUT;
-
-        GIMME ADDITION WITH NUMBER -1;
+        GIMME GREATER THAN;
+        GIMME OUTPUT;
+        GIMME GREATER THAN EQUAL TO;
         GIMME OUTPUT;
 
-        // should exit, false above
-        GIMME AN EXIT IF FALSE;
-        GIMME CONTINUOUSLY THE ABOVE;
+        GIMME A 31;
+
+        GIMME LESS THAN;
+        GIMME OUTPUT;
+        GIMME LESS THAN EQUAL TO;
+        GIMME OUTPUT;
+        GIMME A 20;
+        GIMME EQUAL TO;
+        GIMME OUTPUT;
+
+        // true
+        GIMME GREATER THAN NUMBER 30;
+        GIMME OUTPUT;
+        //false
+        GIMME GREATER THAN EQUAL TO NUMBER 19;
+        GIMME OUTPUT;
+
+        // false
+        GIMME LESS THAN NUMBER 30;
+        GIMME OUTPUT;
+
+        // false
+        GIMME LESS THAN EQUAL TO NUMBER 30;
+        GIMME OUTPUT;
+
+        // true
+        GIMME EQUAL TO NUMBER 20;
+        GIMME OUTPUT;
+
+        //GIMME CONTINUOUSLY THE BELOW;
+        ////GIMME AN EXIT IF FALSE;
+        ////GIMME AN EXIT IF TRUE;
+        //GIMME A "lol here" AND OUTPUT;
+
+        //GIMME ADDITION WITH NUMBER -1;
+        //GIMME OUTPUT;
+
+        //// should exit, false above
+        //GIMME AN EXIT IF FALSE;
+        //GIMME CONTINUOUSLY THE ABOVE;
 
         RUN;
     }
