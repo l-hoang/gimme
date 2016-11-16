@@ -99,10 +99,18 @@ class GimmeStackObject {
     objectType
   }
 
+  /* true if holding a number */
   def isNumber = {
     assertInit
 
     if (objectType == NumType) true else false
+  }
+
+  /* true if holding a boolean */
+  def isBoolean = {
+    assertInit
+
+    if (objectType == BoolType) true else false
   }
 
   /* return this object as a number (does not work for strings) */
@@ -140,7 +148,7 @@ class GimmeStackObject {
 
     objectType match {
       case NumType => if (num == 0) false else true
-      case BoolType => true
+      case BoolType => bool
       case StringType => 
         throw new RuntimeException("not string assertion didn't work")
       case NullType =>
@@ -212,6 +220,18 @@ class GimmeStack {
     }
     
     programStack push newStackObject
+  }
+
+  /* negates the top element then pushes the result onto the stack */
+  def negateTop = {
+    val topObject = programStack.peekFirst
+
+    if (topObject.isNumber)
+      this addElement (-(topObject.asNumber))
+    else if (topObject.isBoolean)
+      this addElement (!(topObject.asBool))
+    else
+      throw new RuntimeException("Can't negate a string")
   }
 
   ///////////////

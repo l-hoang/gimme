@@ -140,6 +140,21 @@ object SanityTest extends Gimme {
         GIMME EQUAL TO NUMBER 20;
         GIMME OUTPUT;
 
+        GIMME A "TESTING NEGATION" AND OUTPUT;
+
+        GIMME A TRUE;
+        GIMME NEGATION;
+        GIMME OUTPUT; // FALSE
+        GIMME NEGATION;
+        GIMME OUTPUT; // TRUE
+
+        GIMME A 20;
+        GIMME OUTPUT; // 20
+        GIMME NEGATION;
+        GIMME OUTPUT; // -20
+        GIMME NEGATION;
+        GIMME OUTPUT; // 20
+
         //GIMME CONTINUOUSLY THE BELOW;
         ////GIMME AN EXIT IF FALSE;
         ////GIMME AN EXIT IF TRUE;

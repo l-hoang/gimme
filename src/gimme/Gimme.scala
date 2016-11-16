@@ -320,6 +320,15 @@ class Gimme {
       }
     }
 
+    //////////////
+    // Negation //
+    //////////////
+
+    def NEGATION = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_NEGATION
+    }
+
     ////////////
     // Output //
     ////////////

@@ -281,6 +281,12 @@ class ProgramText {
         
         case GimmeDivisionWith(num) => currentState stackDivision num
 
+        //////////////
+        // Negation //
+        //////////////
+
+        case GimmeNegation() => currentState.negation
+
         ////////////
         // Output //
         ////////////

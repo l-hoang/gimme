@@ -125,6 +125,8 @@ class ProgramLineBuilder {
       case G_DIVISION => lineToReturn = GimmeDivision()
       case G_DIVISION_WITH => lineToReturn = GimmeDivisionWith(currentNumber)
 
+      case G_NEGATION => lineToReturn = GimmeNegation()
+
       case G_NONE =>
         if (!firstLine)
           throw new RuntimeException("Adding an empty line")

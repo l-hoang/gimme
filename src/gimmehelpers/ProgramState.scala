@@ -123,6 +123,12 @@ class ProgramState {
     gimmeStack addElement (num / gimmeStack.getNthNumber(0))
   }
 
+  //////////////
+  // Negation //
+  //////////////
+
+  def negation = gimmeStack.negateTop
+
   ////////////
   // Output //
   ////////////

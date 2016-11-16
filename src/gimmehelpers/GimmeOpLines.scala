@@ -49,5 +49,7 @@ object GimmeOpLines {
   case class GimmeDivision() extends GimmeOp
   case class GimmeDivisionWith(num: Int) extends GimmeOp
 
+  case class GimmeNegation() extends GimmeOp
+
   case class GimmeOutput() extends GimmeOp
 }
