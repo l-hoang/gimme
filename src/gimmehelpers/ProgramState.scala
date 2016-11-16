@@ -1,5 +1,7 @@
 package gimmehelpers
 
+import java.util.ArrayDeque
+
 /* This class holds the current runtime state of a Gimme program run; wraps
  * a program stack object. */
 class ProgramState {
@@ -45,6 +47,33 @@ class ProgramState {
   /* push/pop for cond line numbers */
   def pushCondStack(lineNumber: Int) = conditionalStack push lineNumber
   def popCondStack = conditionalStack.pop
+
+  /////////////////
+  // Comparators //
+  /////////////////
+
+  def greater = gimmeStack addElement 
+    (gimmeStack.getNthNumber(0) > gimmeStack.getNthNumber(1))
+  def greater(num: Int) = gimmeStack addElement 
+    (num > gimmeStack.getNthNumber(0))
+  def greaterEqual = gimmeStack addElement 
+    (gimmeStack.getNthNumber(0) >= gimmeStack.getNthNumber(1))
+  def greaterEqual(num: Int) = gimmeStack addElement 
+    (num >= gimmeStack.getNthNumber(0))
+
+  def less = gimmeStack addElement 
+    (gimmeStack.getNthNumber(0) < gimmeStack.getNthNumber(1))
+  def less(num: Int) = gimmeStack addElement 
+    (num < gimmeStack.getNthNumber(0))
+  def lessEqual = gimmeStack addElement 
+    (gimmeStack.getNthNumber(0) <= gimmeStack.getNthNumber(1))
+  def lessEqual(num: Int) = gimmeStack addElement 
+    (num <= gimmeStack.getNthNumber(0))
+
+  def equal = gimmeStack addElement 
+    (gimmeStack.getNthNumber(0) == gimmeStack.getNthNumber(1))
+  def equal(num: Int) = gimmeStack addElement 
+    (num == gimmeStack.getNthNumber(0))
 
   ////////////////
   // Binary Ops //

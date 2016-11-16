@@ -26,6 +26,7 @@ object GimmeOpLines {
   case class GimmeLess() extends GimmeOp
   case class GimmeLessEqual() extends GimmeOp
   case class GimmeEqual() extends GimmeOp
+
   case class GimmeGreaterNum(num: Int) extends GimmeOp
   case class GimmeGreaterEqualNum(num: Int) extends GimmeOp
   case class GimmeLessNum(num: Int) extends GimmeOp

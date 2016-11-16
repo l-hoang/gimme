@@ -212,6 +212,22 @@ class ProgramText {
 
         case GimmeCondEnd() => // do nothing, just a cond end line
 
+        /////////////////
+        // Comparators //
+        /////////////////
+
+        case GimmeGreater() => currentState.greater
+        case GimmeGreaterEqual() => currentState.greaterEqual
+        case GimmeLess() => currentState.less
+        case GimmeLessEqual() => currentState.lessEqual
+        case GimmeEqual() => currentState.equal
+
+        case GimmeGreaterNum(num) => currentState greater num
+        case GimmeGreaterEqualNum(num) => currentState greaterEqual num
+        case GimmeLessNum(num) => currentState less num
+        case GimmeLessEqualNum(num) => currentState lessEqual num
+        case GimmeEqualNum(num) => currentState equal num
+
         //////////
         // Loop //
         //////////
