@@ -19,6 +19,7 @@ When you request something else after you've already asked it to give you
 something, the last thing it "gave" you will be overwritten.
 
 ### Basic Gimmes
+
 `GIMME A NUMBER`
 
 Gives you a random number between 0 and 100(?) that is then stored in program state.
@@ -48,8 +49,8 @@ Gives you a *string* and outputs it. *Will not work with booleans or numbers*.
 
 `GIMME <x>`
 
-x should be a numeric expression or (TODO) a boolean comparison. Will give
-you it.
+x should be a numeric expression or a boolean comparison. Will give
+you the result on the stack.
 
 ### Conditionals and Loops
 
@@ -62,6 +63,58 @@ condition specified (true/false).
 `GIMME THE ABOVE`
 
 End of Gimme's conditional construct. Marks the end of a conditional. 
+
+`GIMME CONTINUOUSLY THE BELOW`
+
+Marks the beginning of a while loop. Note that loops are infinite in Gimme
+unless you break out of them.
+
+`GIMME CONTINUOUSLY THE ABOVE`
+
+Marks the end of a while loop. Note that loops are infinite in Gimme
+unless you break out of them.
+
+`GIMME A BREAK`
+
+Breaks out of a loop that the break is contained in.
+
+`GIMME A BREAK IF <TRUE/FALSE>`
+
+Breaks out of a loop that the break is contained in if the last boolean
+was true/false.
+
+
+### Comparators
+
+`GIMME GREATER THAN'
+
+`GIMME GREATER THAN EQUAL TO'
+
+`GIMME LESS THAN'
+
+`GIMME LESS THAN EQUAL TO'
+
+`GIMME EQUAL TO'
+
+Takes the last 2 numbers on the stack and compares them. The top number x1 is on
+the left, the latter number x2 (i.e. below x1 on stack) is on the right, 
+e.g. x1 > x2.
+
+`GIMME GREATER THAN NUMBER <n>'
+
+`GIMME GREATER THAN EQUAL TO NUMBER <n>'
+
+`GIMME LESS THAN NUMBER <n>'
+
+`GIMME LESS THAN EQUAL TO NUMBER <n>'
+
+`GIMME EQUAL TO NUMBER <n>'
+
+Compares the number you give it with the top number on the stack. Note
+the number you give it will be on the left, e.g. n > x1. (x1 is the 
+top number on the stack)
+
+### Operations on Gimme'd Things
 
 `GIMME ADDITION`
 
@@ -79,18 +132,6 @@ The order is Last Thing OP Thing Before That. For example, if I gimme a 10 *then
 a 20, the division operation will do 20 divided by 10.
 
 
-*Loops coming soon?*
-
-`GIMME CONTINUOUSLY THE BELOW`
-
-Marks the beginning of a while loop.
-
-`GIMME CONTINUOUSLY THE ABOVE`
-
-Marks the end of a while loop.
-
-### Operations on Gimme'd Things
-
 `GIMME ADDITION WITH <n>`
 
 `GIMME SUBTRACTION WITH <n>`
@@ -101,6 +142,15 @@ Marks the end of a while loop.
 
 Does the requested binary op with n as the first operand and the last number
 that was gimme'd as the second operand.
+
+### Other
+
+`GIMME NEGATION`
+
+Negates the last thing on the stack as long as it's not a string and pushes
+the result onto the stack. For example, a boolean true on the top of the
+stack will cause a false to be pushed, while a number 10 would caused a -10
+to be pushed.
 
 `GIMME OUTPUT`
 
@@ -115,3 +165,5 @@ line. Another way to get around this would be to put a new line between each
 line, but that makes the code ugly. There are some cases where you do not need to put
 a semi-colon, but I recommend you put one anyways.
 
+## Possible Extensions
+Maybe use APIs to make it able to GIMME more things like Tweets.
