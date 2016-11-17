@@ -7,6 +7,31 @@
 serve no practical purpose
 * To see how far I can take this 
 
+## How To Compile
+
+1) cd to the src directory.
+
+2) Make a "bin" directory in the directory above src. 
+
+3) Run the following in order (the order can be mixed up a bit, but I'm pretty sure this order will work)
+
+```
+scalac -d ../bin/ -cp ../bin gimme/KeywordObjects.scala 
+scalac -d ../bin/ -cp ../bin gimmehelpers/OpEnums.scala 
+scalac -d ../bin/ -cp ../bin gimmehelpers/GimmeOpLines.scala 
+scalac -d ../bin/ -cp ../bin gimmehelpers/ProgramLineBuilders.scala 
+scalac -d ../bin/ -cp ../bin gimmehelpers/GimmeStack.scala 
+scalac -d ../bin/ -cp ../bin gimmehelpers/ProgramState.scala 
+scalac -d ../bin/ -cp ../bin gimmehelpers/ProgramText.scala 
+scalac -d ../bin/ -cp ../bin gimme/Gimme.scala 
+scalac -d ../bin/ -cp ../bin tests/SanityTest.scala 
+```
+
+4) To run the Sanity Test, cd over to the bin directory and run the following
+
+`scala tests.SanityTest`
+
+
 ## Language Specification
 
 Gimme is very similar to assembly language programming. 
