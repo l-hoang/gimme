@@ -19,7 +19,8 @@ class Gimme {
   val lineBuilder = new ProgramLineBuilder
   val programText = new ProgramText
 
-  /* The keyword GIMME which starts lines in this language */
+  /* The keyword GIMME which starts lines in this language; has method
+   * calls that correspond to the valid continuations of a Gimme line */
   object GIMME {
     /////////////
     // Numbers //
@@ -167,6 +168,8 @@ class Gimme {
     /////////////////
     // Comparators //
     /////////////////
+
+    /* The comparison commands for the language */
 
     def GREATER(t: ThanWord) = {
       programText finishLine lineBuilder
@@ -325,6 +328,8 @@ class Gimme {
     //////////////
     // Negation //
     //////////////
+
+    /* This will negate the last thing stored on the stack */
 
     def NEGATION = {
       programText finishLine lineBuilder

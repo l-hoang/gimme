@@ -1,6 +1,7 @@
 package gimmehelpers
 
-/* basically an enum class for my ops */
+/* basically an enum class for my ops; these are set into the Line Builder
+ * so that the Line builder knows what to return */
 object OpEnums {
   abstract sealed class GimmeOpEnum
 

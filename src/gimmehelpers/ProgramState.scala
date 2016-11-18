@@ -3,7 +3,7 @@ package gimmehelpers
 import java.util.ArrayDeque
 
 /* This class holds the current runtime state of a Gimme program run; wraps
- * a program stack object. */
+ * a program stack object and acts on it to do things.. */
 class ProgramState {
   // program stack
   val gimmeStack = new GimmeStack
@@ -51,6 +51,11 @@ class ProgramState {
   /////////////////
   // Comparators //
   /////////////////
+
+  /* Do the comparisons with the top 2 stack elements: the top most element
+   * goes on the "left"
+   * If a number is provided, that number goes on the left while the top
+   * most element goes to the right */
 
   def greater = gimmeStack addElement 
     (gimmeStack.getNthNumber(0) > gimmeStack.getNthNumber(1))
@@ -127,6 +132,8 @@ class ProgramState {
   // Negation //
   //////////////
 
+  /* Calls a method that will push the opposite of the top most element
+   * onto the stack */
   def negation = gimmeStack.negateTop
 
   ////////////

@@ -2,7 +2,7 @@ package gimmehelpers
 
 import java.util.ArrayDeque
 
-/* Represents a scala stack object */
+/* Represents a Gimme stack, which is what Gimme uses as memory. */
 class GimmeStackObject {
   ///////////////////
   // Element types //
@@ -248,6 +248,7 @@ class GimmeStack {
     programStack.peekFirst.outputElement
   }
 
+  /* Grabs the nth number from the top of the stack and returns it */
   def getNthNumber(n: Int): Int = {
     val objectIterator = programStack.iterator 
     var counter = 0

@@ -72,7 +72,8 @@ class ProgramLineBuilder {
   // Line builder returns a line here //
   //////////////////////////////////////
 
-  /* Given the metadata that should be set by the DSL "parser", return a line */
+  /* Given the metadata that should be set by the DSL "parser", return a line
+   * as a case class. */
   def returnLine = {
     var lineToReturn: GimmeOp = GimmeNone
 
@@ -141,5 +142,3 @@ class ProgramLineBuilder {
   }
 
 }
-
-

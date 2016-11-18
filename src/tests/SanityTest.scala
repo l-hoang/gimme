@@ -3,6 +3,7 @@ package tests
 import gimme._
 import scala.language.postfixOps
 
+/* A test file for running certain commands to see if the work */
 object SanityTest extends Gimme {
     def main(args: Array[String]) = {
         GIMME A STRING;
