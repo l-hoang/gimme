@@ -19,7 +19,7 @@ serve no practical purpose
 scalac -d ../bin/ -cp ../bin gimme/KeywordObjects.scala 
 scalac -d ../bin/ -cp ../bin gimmehelpers/OpEnums.scala 
 scalac -d ../bin/ -cp ../bin gimmehelpers/GimmeOpLines.scala 
-scalac -d ../bin/ -cp ../bin gimmehelpers/ProgramLineBuilders.scala 
+scalac -d ../bin/ -cp ../bin gimmehelpers/ProgramLineBuilder.scala 
 scalac -d ../bin/ -cp ../bin gimmehelpers/GimmeStack.scala 
 scalac -d ../bin/ -cp ../bin gimmehelpers/ProgramState.scala 
 scalac -d ../bin/ -cp ../bin gimmehelpers/ProgramText.scala 
