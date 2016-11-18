@@ -118,7 +118,9 @@ class ProgramText {
       ///////////
 
       case GimmeBreak(_) =>
-        // push our line onto the "to handle" stack for this loop
+        // push our line onto the "to handle" stack for this loop (we don't
+        // currently know where to go on break; to be updated when we hit
+        // the loop end
         breakStack(loopStack.peek) push currentLineNumber
         // add line (will be changed later)
         addLine(line)
@@ -136,6 +138,7 @@ class ProgramText {
       // Everything else //
       /////////////////////
 
+      // no special handling is required for other lines 
       case _ => addLine(line)
     }
   }
@@ -150,6 +153,9 @@ class ProgramText {
     // make sure the conditional stack is empty
     if (!conditionalStack.isEmpty) {
       throw new RuntimeException("There are unclosed conditionals\n")
+    }
+    if (!loopStack.isEmpty) {
+      throw new RuntimeException("There are unclosed loops\n")
     }
 
     // TODO add more checks as I make the program more complex
@@ -168,6 +174,8 @@ class ProgramText {
       val currentLine = gimmeLines(runtimeLineNumber)
       var lineJump = false
 
+      /* based on what kind of line we are currently on, take the appropriate
+       * action and apply it to the passed in program state */
       currentLine match {
         //////////////////
         // Basic Gimmes //
@@ -243,6 +251,8 @@ class ProgramText {
         // Break //
         ///////////
 
+        /* break stores where we need to jump, so we can just jump to the
+         * correct location */
         case GimmeBreak(jumpLocation) => 
           runtimeLineNumber = jumpLocation
           lineJump = true
