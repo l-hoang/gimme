@@ -31,6 +31,77 @@ scalac -d ../bin/ -cp ../bin tests/SanityTest.scala
 
 `scala tests.SanityTest`
 
+## How Gimme Works as a DSL
+
+The following section will explain what the purpose of each file is in this system.
+
+### gimme/Gimme.scala
+
+This file contains the Gimme class, which is what one wants to extend when 
+writing a program in Gimme.
+
+The GIMME object acts as the beginning of a Gimme line: it contains method
+calls that correspond to the next valid word that could come after the word
+GIMME in a Gimme program. There are also apply methods that take certain
+arguments and do things with them as well.
+
+The class contains a Program Text instance (explained below) that stores
+the program as it is parsed by the Gimme class. The Gimme class will call 
+into this function to set lines as they are being read, and at the beginning
+of each Gimme line, the last line parsed will be stored.
+
+### gimme/KeywordObjects.scala
+
+This file contains some keywords of the language instantiated as objects that
+inherit from classes of that word.
+
+The purpose of these is to act as something that the Scala parser can take
+as arguments in order to continue the parse of a Gimme line.
+
+### gimmehelpers/GimmeOpLines.scala
+
+This file contains the case classes for the possible Gimme lines. They are used
+by the program to represent lines in a Gimme program so that they can be
+easily run later through matching case classes.
+
+### gimmehelpers/GimmeStack.scala
+
+This file contains the implementation of the Gimme Stack: Gimme has a stack
+that contains the most recent things Gimme'd.
+
+There is an implementation of an element in the stack and the stack itself.
+It wraps a Java ArrayDeque (the underlying implementation of the stack).
+
+### gimmehelpers/OpEnums.scala
+
+This file holds the "enums" used by the program. These enums are set
+to designate what kind of line is currently being parsed so that the LineBuilder
+knows what kind of line to return.
+
+### gimmehelpers/ProgramLineBuilder.scala
+
+This file contains the Gimme Line Builder which is responsible for returning
+Gimme lines (as case classes) for storage by the program text. The main Gimme
+program is able to set things in this class so that it knows what kind of
+line it needs to return when the method to finish a line is called on it.
+
+### gimmehelpers/ProgramState.scala
+
+This file contains the program state of a Gimme program. It is changed
+as a Gimme program is executed. The main thing it holds is the program
+stack (the Gimme stack mentioned above), and it is passed into
+the Program Text class so that the text can change the state of the program
+as it runs it.
+
+### gimmehelpers/ProgramText.scala
+
+This class holds the lines that are parsed by the main Gimme class (and
+a Line Builder that is responsible for making those lines). The main Gimme
+class calls into this one to create lines and save them. It also contains
+the runtime handler, as in it is responsible for running a program since
+it has access to the lines. It runs a program by going through the stored
+Gimme lines and taking the appropriate action on a passed in program
+state.
 
 ## Language Specification
 
