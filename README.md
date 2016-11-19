@@ -95,9 +95,10 @@ as it runs it.
 
 ### gimmehelpers/ProgramText.scala
 
-This class holds the lines that are parsed by the main Gimme class (and
-a Line Builder that is responsible for making those lines). The main Gimme
-class calls into this one to create lines and save them. It also contains
+This class holds the lines that are parsed by the main Gimme class 
+The main Gimme class passes in a line builder object so this class can
+save the lines.
+It also contains
 the runtime handler, as in it is responsible for running a program since
 it has access to the lines. It runs a program by going through the stored
 Gimme lines and taking the appropriate action on a passed in program
