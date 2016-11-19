@@ -192,6 +192,7 @@ class Gimme {
     ///////////////////
 
     def THE(r: ResultWord) = {
+      programText finishLine lineBuilder
       FuncCallContinue
     }
 

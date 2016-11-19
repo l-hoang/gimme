@@ -184,7 +184,8 @@ object SanityTest extends Gimme {
         GIMME AN EXIT IF TRUE;
         GIMME CONTINUOUSLY THE ABOVE;
 
-        //GIMME THE RESULT OF "lol";
+        GIMME THE RESULT OF "lol";
+        GIMME A "done" AND OUTPUT;
 
         RUN;
     }

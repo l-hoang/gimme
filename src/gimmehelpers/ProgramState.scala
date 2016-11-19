@@ -13,6 +13,10 @@ class ProgramState {
   // holds current loop beginning line numbers
   val loopStack = new ArrayDeque[Int]
 
+  // function call line number stack for knowing where to jump back to
+  // after a function call is finished
+  val functionCallStack = new ArrayDeque[Int]
+
   ///////////////////
   // State setters //
   ///////////////////
@@ -47,6 +51,11 @@ class ProgramState {
   /* push/pop for cond line numbers */
   def pushCondStack(lineNumber: Int) = conditionalStack push lineNumber
   def popCondStack = conditionalStack.pop
+
+  /* function call stack methods */
+  def pushFuncStack(lineNumber: Int) = functionCallStack push lineNumber
+  def popFuncStack = functionCallStack.pop 
+  def funcStackEmpty = functionCallStack.isEmpty
 
   /////////////////
   // Comparators //

@@ -278,7 +278,31 @@ class ProgramText {
           runtimeLineNumber = jumpLocation
           lineJump = true
 
-        case GimmeFunctionEnd(_) => // do nothing; just a marker
+        case GimmeFunctionEnd(_) =>
+          // make sure the func call stack is non-empty
+          if (currentState.funcStackEmpty) {
+            throw new RuntimeException("Returning from function when none called")
+          }
+
+          runtimeLineNumber = currentState.popFuncStack
+          lineJump = true
+
+        ///////////////////
+        // Function Call //
+        ///////////////////
+
+        case GimmeFunctionCall(functionName) => 
+          // grab the line to jump to
+          if (!(gimmeFunctions contains functionName)) {
+            throw new RuntimeException("calling an undefined function")
+          }
+
+          // save next line number to jump back to later
+          currentState pushFuncStack (runtimeLineNumber + 1)
+
+          // jump to beginning of function
+          runtimeLineNumber = gimmeFunctions(functionName)
+          lineJump = true
 
         /////////////////
         // Comparators //
