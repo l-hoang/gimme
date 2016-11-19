@@ -55,3 +55,8 @@ object TO extends ToWord
 // represents END
 abstract sealed class EndWord
 object END extends EndWord
+
+// represents RESULT
+abstract sealed class ResultWord
+object RESULT extends ResultWord
+
