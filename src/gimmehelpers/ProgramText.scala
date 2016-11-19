@@ -29,6 +29,8 @@ class ProgramText {
   val loopStack = new ArrayDeque[Int]
   // holds all breaks (line numbers) that exist in a loop (for later update)
   val breakStack = new HashMap[Int, ArrayDeque[Int]]
+  // map from function names to the beginning of the function (line number)
+  val gimmeFunctions = new HashMap[String, Int]
 
   ///////////////////////////
   // Line adding functions //
@@ -66,6 +68,14 @@ class ProgramText {
         
         // add the cond end
         addLine(line)
+
+      ////////////////////
+      // Function lines //
+      ////////////////////
+
+      case GimmeFunctionBegin(functionName) =>
+
+      case GimmeFunctionEnd(functionName) =>
 
       ////////////////
       // Loop lines //
