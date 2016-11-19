@@ -21,6 +21,9 @@ object GimmeOpLines {
                             trueOrFalse: Boolean) extends GimmeOp
   case class GimmeCondEnd() extends GimmeOp
 
+  case class GimmeFunctionBegin() extends GimmeOp
+  case class GimmeFunctionEnd() extends GimmeOp
+
   case class GimmeGreater() extends GimmeOp
   case class GimmeGreaterEqual() extends GimmeOp
   case class GimmeLess() extends GimmeOp

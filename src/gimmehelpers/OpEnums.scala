@@ -21,6 +21,9 @@ object OpEnums {
   case object G_COND_BEGIN extends GimmeOpEnum
   case object G_COND_END extends GimmeOpEnum
 
+  case object G_FUNCTION_BEGIN extends GimmeOpEnum
+  case object G_FUNCTION_END extends GimmeOpEnum
+
   case object G_GREATER extends GimmeOpEnum
   case object G_GREATER_EQUAL extends GimmeOpEnum
   case object G_LESS extends GimmeOpEnum

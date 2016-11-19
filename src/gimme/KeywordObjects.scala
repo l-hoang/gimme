@@ -52,3 +52,6 @@ object THAN extends ThanWord
 abstract sealed class ToWord
 object TO extends ToWord
 
+// represents END
+abstract sealed class EndWord
+object END extends EndWord
