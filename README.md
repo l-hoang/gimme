@@ -31,6 +31,37 @@ scalac -d ../bin/ -cp ../bin tests/SanityTest.scala
 
 `scala tests.SanityTest`
 
+## Creating a Gimme Program
+
+First, import the following into your program.
+
+```
+import gimme._
+import scala.language.postfixOps
+```
+
+Then, extend the Gimme class for the class/object you want to use Gimme
+syntax on.
+
+```
+object Tester extends Gimme {
+  ...
+}
+```
+
+From here, you have access to Gimme program syntax. 
+
+```
+object Tester extends Gimme {
+  GIMME A NUMBER;
+  GIMME OUTPUT;
+  
+  RUN;
+}
+```
+
+RUN needs to appear at the end of a Gimme program in order for it to execute.
+
 ## How Gimme Works as a DSL
 
 The following section will explain what the purpose of each file is in this system.
@@ -103,6 +134,7 @@ the runtime handler, as in it is responsible for running a program since
 it has access to the lines. It runs a program by going through the stored
 Gimme lines and taking the appropriate action on a passed in program
 state.
+
 
 ## Language Specification
 
