@@ -20,8 +20,12 @@ class ProgramText {
   // current line number
   var currentLineNumber = 1;
 
+  // random number generator used for various purposes
   val rng = new Random()
+  // map of gimme lines 
   val gimmeLines = new HashMap[Int, GimmeOp]
+  // map from function names to the beginning of the function (line number)
+  val gimmeFunctions = new HashMap[String, Int]
 
   // holds current conditional beginning line numbers
   val conditionalStack = new ArrayDeque[Int]
@@ -29,8 +33,10 @@ class ProgramText {
   val loopStack = new ArrayDeque[Int]
   // holds all breaks (line numbers) that exist in a loop (for later update)
   val breakStack = new HashMap[Int, ArrayDeque[Int]]
-  // map from function names to the beginning of the function (line number)
-  val gimmeFunctions = new HashMap[String, Int]
+  // function stack that tells us which functions aren't closed yet
+  val functionStack = new ArrayDeque[String]
+  // function stack that holds functiong beginning line number
+  val functionStackNumbers = new ArrayDeque[Int]
 
   ///////////////////////////
   // Line adding functions //
@@ -73,9 +79,35 @@ class ProgramText {
       // Function lines //
       ////////////////////
 
-      case GimmeFunctionBegin(functionName) =>
+      case GimmeFunctionBegin(functionName, _) =>
+        // push function onto unclosed functions, check if undeclared,
+        // then add to lines after saving this line number
+        functionStack push functionName
+
+        if (gimmeFunctions contains functionName) {
+          throw new RuntimeException("Redefining an existing function")
+        }
+
+        functionStackNumbers push currentLineNumber
+        // save function binding to map
+        gimmeFunctions.put(functionName, currentLineNumber + 1)
+
+        addLine(line)
 
       case GimmeFunctionEnd(functionName) =>
+        // see if this closes the currently "active" function; if so,
+        // then add else die
+        if (functionStack.peek == functionName) {
+          functionStack.pop
+
+          // revise function beginning line with the end of the function
+          val functionBegin = functionStackNumbers.pop 
+          gimmeLines.put(functionBegin, GimmeFunctionBegin(functionName,
+                                                         currentLineNumber + 1))
+          addLine(line)
+        } else {
+          throw new RuntimeException("Ending the wrong function/invalid func end")
+        }
 
       ////////////////
       // Loop lines //
@@ -167,6 +199,13 @@ class ProgramText {
     if (!loopStack.isEmpty) {
       throw new RuntimeException("There are unclosed loops\n")
     }
+    if (!functionStack.isEmpty) {
+      throw new RuntimeException("There are functions not closed\n")
+    }
+    if (!functionStackNumbers.isEmpty) {
+      throw new RuntimeException("There are functions not closed (numbers)\n")
+    }
+
 
     // TODO add more checks as I make the program more complex
   }

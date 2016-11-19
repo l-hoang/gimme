@@ -94,7 +94,8 @@ class ProgramLineBuilder {
       case G_COND_BEGIN => lineToReturn = GimmeCondBegin(-1, condBool)
       case G_COND_END => lineToReturn = GimmeCondEnd()
       
-      case G_FUNCTION_BEGIN => lineToReturn = GimmeFunctionBegin(currentString)
+      case G_FUNCTION_BEGIN => lineToReturn = GimmeFunctionBegin(currentString,
+                                                                 -1)
       case G_FUNCTION_END => lineToReturn = GimmeFunctionEnd(currentString)
 
       case G_GREATER => lineToReturn = GimmeGreater()
