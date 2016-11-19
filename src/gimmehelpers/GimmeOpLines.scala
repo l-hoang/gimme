@@ -25,6 +25,8 @@ object GimmeOpLines {
                                 funcLineEnd: Int) extends GimmeOp
   case class GimmeFunctionEnd(functionName: String) extends GimmeOp
 
+  case class GimmeFunctionCall(functionName: String) extends GimmeOp
+
   case class GimmeGreater() extends GimmeOp
   case class GimmeGreaterEqual() extends GimmeOp
   case class GimmeLess() extends GimmeOp
