@@ -141,6 +141,18 @@ object SanityTest extends Gimme {
         GIMME EQUAL TO NUMBER 20;
         GIMME OUTPUT;
 
+        GIMME A "FUNCTION DECL TEST" AND OUTPUT;
+
+        GIMME THE BELOW AS "lol";
+        GIMME A "Shouldn't print this" AND OUTPUT;
+        GIMME A "Shouldn't print this" AND OUTPUT;
+        GIMME A "Shouldn't print this" AND OUTPUT;
+        GIMME A "Shouldn't print this" AND OUTPUT;
+        GIMME A "Shouldn't print this" AND OUTPUT;
+        GIMME THE END OF "lol";
+        
+        GIMME A "FUNCTION DECL DONE" AND OUTPUT;
+
         GIMME A "TESTING NEGATION" AND OUTPUT;
 
         GIMME A TRUE;
