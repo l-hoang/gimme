@@ -132,9 +132,9 @@ class Gimme {
 
     /* TODO add TRUE/FALSE? */
 
-    ///////////////////////////
-    // Conditional/Functions //
-    ///////////////////////////
+    //////////////////////////////////////
+    // Conditional/Function Declaration //
+    //////////////////////////////////////
 
     /* the beginning of a conditional/functions */
     def THE(b: BelowWord) = {
@@ -160,20 +160,20 @@ class Gimme {
     /* continues the parse of a conditional */
     object TheContinue {
       /* conditional looking for a true */
-      def IF(t: TrueWord) {
+      def IF(t: TrueWord) = {
         lineBuilder.conditionalTrueSet
         lineBuilder setOp OpEnums.G_COND_BEGIN
       }
   
       /* conditional looking for a false */
-      def IF(t: FalseWord) {
+      def IF(t: FalseWord) = {
         lineBuilder.conditionalFalseSet
         lineBuilder setOp OpEnums.G_COND_BEGIN
       }
 
       /* save the function name to the line builder and tell it
        * the next line is a line builder */
-      def AS(functionName: String) {
+      def AS(functionName: String) = {
         lineBuilder setGimmeValue functionName
         lineBuilder setOp OpEnums.G_FUNCTION_BEGIN
       }
@@ -184,6 +184,23 @@ class Gimme {
       def OF(functionName: String) {
         lineBuilder setGimmeValue functionName
         lineBuilder setOp OpEnums.G_FUNCTION_END
+      }
+    }
+
+    ///////////////////
+    // Function Call //
+    ///////////////////
+
+    def THE(r: ResultWord) = {
+      FuncCallContinue
+    }
+
+    
+    object FuncCallContinue {
+      /* end of function call; grabs the function to call */
+      def OF(functionName: String) = {
+        lineBuilder setGimmeValue functionName
+        lineBuilder setOp OpEnums.G_FUNCTION_CALL
       }
     }
 
