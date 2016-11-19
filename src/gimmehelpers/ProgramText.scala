@@ -269,6 +269,17 @@ class ProgramText {
 
         case GimmeCondEnd() => // do nothing, just a cond end line
 
+        ///////////////////
+        // Function Defs //
+        ///////////////////
+
+        // if a function declaration, just skip over it
+        case GimmeFunctionBegin(_, jumpLocation) =>
+          runtimeLineNumber = jumpLocation
+          lineJump = true
+
+        case GimmeFunctionEnd(_) => // do nothing; just a marker
+
         /////////////////
         // Comparators //
         /////////////////
