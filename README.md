@@ -107,13 +107,26 @@ state.
 ## Language Specification
 
 Gimme is very similar to assembly language programming. 
-Currently it can only store 1 thing in memory, but this will soon change
-with the addition of a stack of sorts.  There is no concept of variables.
-
+All Gimmes will end up on a stack, and this stack will act as your memory.
+The stack has limited memory. Currently I believe it is set to hold the
+last 20 things that have been Gimme'd, and anything more than that will
+cause the bottom of the stack to be evicted.
 Gimme works by giving you things whenever you ask for them. The thing you
-asked for will then be stored in program state.
-When you request something else after you've already asked it to give you
-something, the last thing it "gave" you will be overwritten.
+asked for will then be stored in program state (i.e. the top of the
+stack).
+
+Conditionals in Gimme will look for the last boolean Gimme'd on the program
+stack and take/not take the conditional branch depending on if you want
+to go true or false.
+
+Loops in Gimme are infinite loops. The only way to get out of them is
+to use the Gimme break command, which can be an unconditional break
+or a conditional break dependent on the last boolean.
+
+Function calls in Gimme are basically just jumps to predefined 
+sequences: no function call stack is really constructed except for the stack
+of line numbers to jump to once execution reaches the end of the function
+call.
 
 ### Basic Gimmes
 
@@ -180,6 +193,22 @@ Breaks out of a loop that the break is contained in.
 Breaks out of a loop that the break is contained in if the last boolean
 was true/false.
 
+
+### Functions
+
+`GIMME THE BELOW AS "<function name>"`
+Marks the beginning of a function. All Gimmes after this line until the 
+function end marker will be considered 1 function.
+
+`GIMME THE END OF "<function name>"`
+
+Marks the end of a function.
+
+`GIMME THE RESULT OF "<function name>"`
+
+Function call. Calls the function specified. By "call", it basically 
+just jumps into the function with the entire program stack intact, and
+when the function end it just goes to the next line.
 
 ### Comparators
 
@@ -253,8 +282,13 @@ to be pushed.
 
 Prints to stdout the last thing you requested the program to give you.
 
-## Other Notes
+`RUN`
 
+Not a part of the Gimme language, but this should be the last thing in any
+defined Gimme program in order to actually start execution of the program
+from the beginning.
+
+## Other Notes
 
 **Note that all lines should end with a semi-colon or bad things might happen**. The
 purpose of the semi-colon is the stop the runtime from trying to parse the next
