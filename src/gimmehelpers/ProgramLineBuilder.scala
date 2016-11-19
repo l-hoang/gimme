@@ -98,6 +98,8 @@ class ProgramLineBuilder {
                                                                  -1)
       case G_FUNCTION_END => lineToReturn = GimmeFunctionEnd(currentString)
 
+      case G_FUNCTION_CALL => lineToReturn = GimmeFunctionCall(currentString)
+
       case G_GREATER => lineToReturn = GimmeGreater()
       case G_GREATER_EQUAL => lineToReturn = GimmeGreaterEqual()
       case G_LESS => lineToReturn = GimmeLess()
