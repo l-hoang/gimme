@@ -390,6 +390,10 @@ class ProgramText {
         case GimmeNone => 
           throw new RuntimeException("Shouldn't have added a None line to text")
       }
+
+      if (currentLine.needToPrint) {
+        currentState.output
+      }
       
       // increment runtime line number in prep for next go around if we aren't
       // jumping somewhere
