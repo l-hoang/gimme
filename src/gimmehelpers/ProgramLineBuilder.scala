@@ -15,6 +15,8 @@ class ProgramLineBuilder {
   // marker for first line
   var firstLine = true
 
+  var shouldPrint = false
+
   /* set the next op */
   def setOp(newOp: GimmeOpEnum) = {
     currentOp = newOp
@@ -140,9 +142,17 @@ class ProgramLineBuilder {
           firstLine = false
     }
 
+    // if AND OUTPUT was found, this will be true, so set the line to a print
+    // line
+    if (shouldPrint) {
+      lineToReturn.doPrint
+    }
+
     // reset everything in prep for next line
     // reset op
     currentOp = G_NONE
+    // reset print
+    shouldPrint = false
 
     lineToReturn
   }

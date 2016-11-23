@@ -2,7 +2,16 @@ package gimmehelpers
 
 /* holds line types for storing lines in program text */
 object GimmeOpLines {
-  abstract sealed class GimmeOp
+  /* Gimme Op class that everything extends; has a print indicator */
+  sealed class GimmeOp {
+    var printMe = false
+
+    /* Say that this line should be outputted when run */
+    def doPrint = printMe = true
+
+    /* Returns a boolean saying if this line should be printed */
+    def printStatus = printMe
+  }
 
   case object GimmeNone extends GimmeOp
 
