@@ -187,6 +187,32 @@ object SanityTest extends Gimme {
         GIMME THE RESULT OF "lol";
         GIMME A "done" AND OUTPUT;
 
+        GIMME A "\n\n\n\n with output test \n\n\n" AND OUTPUT;
+
+        GIMME A 123 AND OUTPUT;
+        GIMME (1 + 1) AND OUTPUT;
+        GIMME A TRUE AND OUTPUT;
+        GIMME A FALSE AND OUTPUT;
+        GIMME A NUMBER BETWEEN 20 AND 21 AND OUTPUT;
+
+        GIMME A BOOL AND OUTPUT;
+        GIMME (1 > 3) AND OUTPUT;
+        GIMME A true AND OUTPUT;
+        GIMME A false AND OUTPUT;
+
+        GIMME A 1;
+        GIMME A 1;
+
+        //// should be 2
+        //GIMME ADDITION AND OUTPUT;
+        //// should be 3
+        //GIMME ADDITION WITH NUMBER 1 AND OUTPUT;
+
+        //// should be 1
+        //GIMME SUBTRACTION AND OUTPUT;
+        //// should be 2
+        //GIMME SUBTRACTION WITH NUMBER 3 AND OUTPUT;
+
         RUN;
     }
 }
