@@ -60,3 +60,6 @@ object END extends EndWord
 abstract sealed class ResultWord
 object RESULT extends ResultWord
 
+// represents AND
+abstract sealed class AndWord
+object AND extends AndWord
