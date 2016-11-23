@@ -135,25 +135,25 @@ class ProgramLineBuilder {
       case G_ADDITION => lineToReturn = GimmeAddition()
       case G_ADDITION_WITH => 
         if (!withDone) {
-          throw new RuntimeException("With construct didn't specify a number")
+          throw new RuntimeException("With add construct didn't specify a number")
         }
         lineToReturn = GimmeAdditionWith(currentNumber)
       case G_SUBTRACTION => lineToReturn = GimmeSubtraction()
       case G_SUBTRACTION_WITH => 
         if (!withDone) {
-          throw new RuntimeException("With construct didn't specify a number")
+          throw new RuntimeException("With sub construct didn't specify a number")
         }
         lineToReturn = GimmeSubtractionWith(currentNumber)
       case G_MULTIPLICATION => lineToReturn = GimmeMultiplication()
       case G_MULTIPLICATION_WITH => 
         if (!withDone) {
-          throw new RuntimeException("With construct didn't specify a number")
+          throw new RuntimeException("With mult construct didn't specify a number")
         }
         lineToReturn = GimmeMultiplicationWith(currentNumber)
       case G_DIVISION => lineToReturn = GimmeDivision()
       case G_DIVISION_WITH => 
         if (!withDone) {
-          throw new RuntimeException("With construct didn't specify a number")
+          throw new RuntimeException("With div construct didn't specify a number")
         }
         lineToReturn = GimmeDivisionWith(currentNumber)
 
