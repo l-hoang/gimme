@@ -3,14 +3,14 @@ package gimmehelpers
 /* holds line types for storing lines in program text */
 object GimmeOpLines {
   /* Gimme Op class that everything extends; has a print indicator */
-  sealed class GimmeOp {
+  sealed trait GimmeOp {
     var printMe = false
 
     /* Say that this line should be outputted when run */
     def doPrint = printMe = true
 
     /* Returns a boolean saying if this line should be printed */
-    def printStatus = printMe
+    def needToPrint = printMe
   }
 
   case object GimmeNone extends GimmeOp
