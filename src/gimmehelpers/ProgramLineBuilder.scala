@@ -18,8 +18,8 @@ class ProgramLineBuilder {
   // says if this line (result) should be printed
   var shouldPrint = false
 
-  // says if binary op with construction is done
-  var withDone = false
+  // says if line is in a complete state
+  var lineDone = false
 
 
   /* set the next op */
@@ -79,7 +79,7 @@ class ProgramLineBuilder {
   def setOutput = shouldPrint = true
 
   /* with construction complete */
-  def withComplete = withDone = true
+  def lineComplete = lineDone = true
 
   //////////////////////////////////////
   // Line builder returns a line here //
@@ -134,25 +134,25 @@ class ProgramLineBuilder {
 
       case G_ADDITION => lineToReturn = GimmeAddition()
       case G_ADDITION_WITH => 
-        if (!withDone) {
+        if (!lineDone) {
           throw new RuntimeException("With add construct didn't specify a number")
         }
         lineToReturn = GimmeAdditionWith(currentNumber)
       case G_SUBTRACTION => lineToReturn = GimmeSubtraction()
       case G_SUBTRACTION_WITH => 
-        if (!withDone) {
+        if (!lineDone) {
           throw new RuntimeException("With sub construct didn't specify a number")
         }
         lineToReturn = GimmeSubtractionWith(currentNumber)
       case G_MULTIPLICATION => lineToReturn = GimmeMultiplication()
       case G_MULTIPLICATION_WITH => 
-        if (!withDone) {
+        if (!lineDone) {
           throw new RuntimeException("With mult construct didn't specify a number")
         }
         lineToReturn = GimmeMultiplicationWith(currentNumber)
       case G_DIVISION => lineToReturn = GimmeDivision()
       case G_DIVISION_WITH => 
-        if (!withDone) {
+        if (!lineDone) {
           throw new RuntimeException("With div construct didn't specify a number")
         }
         lineToReturn = GimmeDivisionWith(currentNumber)
@@ -167,6 +167,11 @@ class ProgramLineBuilder {
           firstLine = false
     }
 
+    // make sure for sanity that the line was actually complete
+    if (!lineDone) {
+      throw new RuntimeException("finished a non-complete line in line builder")
+    }
+
     // if AND OUTPUT was found, this will be true, so set the line to a print
     // line
     if (shouldPrint) {
@@ -178,8 +183,8 @@ class ProgramLineBuilder {
     currentOp = G_NONE
     // reset print
     shouldPrint = false
-    // reset with done
-    withDone = false
+    // reset line done
+    lineDone = false
 
     lineToReturn
   }
