@@ -22,6 +22,19 @@ class Gimme {
   /* The keyword GIMME which starts lines in this language; has method
    * calls that correspond to the valid continuations of a Gimme line */
   object GIMME {
+
+    //////////////////////////
+    // And Output Extension //
+    //////////////////////////
+
+    /* Looks for AND OUTPUT; if it finds it, it means the runtime should
+     * also output the gimme'd thing */
+    object AndOutputExtend {
+      def AND(o: OutputWord) = {
+        lineBuilder.setOutput
+      }
+    }
+
     /////////////
     // Numbers //
     /////////////
@@ -39,6 +52,8 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue num
       lineBuilder setOp OpEnums.G_NUMBER
+
+      AndOutputExtend
     }
 
     /* simple apply for expressions (i.e. wrapped in parens) 
@@ -47,6 +62,8 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue num
       lineBuilder setOp OpEnums.G_NUMBER
+
+      AndOutputExtend
     }
 
     /* continues the parse of a Gimme A Number line */
@@ -55,6 +72,11 @@ class Gimme {
         // continue the parse
         new AndContinue(lowerBound)
       }
+
+      /* in case no range is specified but output is */
+      def AND(o: OutputWord) = {
+        lineBuilder.setOutput
+      }
     }
   
     /* continues the Between/And construction for numbers */
@@ -62,6 +84,8 @@ class Gimme {
       def AND(upperBound: Int) = {
         lineBuilder.setGimmeRange(low, upperBound)
         lineBuilder setOp OpEnums.G_NUMBER_RANGE
+
+        AndOutputExtend
       }
     }
 
@@ -73,6 +97,8 @@ class Gimme {
     def A(s: StringWord) = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_STRING_RANDOM
+
+      AndOutputExtend
     }
 
     /* if given a string, save it */
@@ -100,6 +126,8 @@ class Gimme {
     def A(b: BoolWord) = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_BOOL_RANDOM
+
+      AndOutputExtend
     }
 
     /* if given a bool, save it */
@@ -107,6 +135,8 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue b
       lineBuilder setOp OpEnums.G_BOOL
+
+      AndOutputExtend
     }
 
     /* handles the 2 cases where people may put TRUE or FALSE instead of
@@ -115,12 +145,16 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue true
       lineBuilder setOp OpEnums.G_BOOL
+
+      AndOutputExtend
     }
 
     def A(f: FalseWord) = {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue false
       lineBuilder setOp OpEnums.G_BOOL
+
+      AndOutputExtend
     }
 
     /* allows for GIMME (1 > 3) or any other parenthesized Scala expression */
@@ -128,6 +162,8 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue b
       lineBuilder setOp OpEnums.G_BOOL
+
+      AndOutputExtend
     }
 
     /* TODO add TRUE/FALSE? */
@@ -260,6 +296,11 @@ class Gimme {
                                        "ops")
         }
       }
+
+      /* in case no range is specified but output is */
+      def AND(o: OutputWord) = {
+        lineBuilder.setOutput
+      }
     }
 
     //////////////////
@@ -313,6 +354,8 @@ class Gimme {
     def ADDITION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_ADDITION
+
+      AndOutputExtend
     }
 
     def ADDITION(w: WithWord) = {
@@ -325,6 +368,8 @@ class Gimme {
     def SUBTRACTION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_SUBTRACTION
+
+      AndOutputExtend
     }
 
     def SUBTRACTION(w: WithWord) = {
@@ -337,6 +382,8 @@ class Gimme {
     def MULTIPLICATION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_MULTIPLICATION
+
+      AndOutputExtend
     }
 
     def MULTIPLICATION(w: WithWord) = {
@@ -349,6 +396,8 @@ class Gimme {
     def DIVISION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_DIVISION
+
+      AndOutputExtend
     }
 
     def DIVISION(w: WithWord) = {
@@ -362,6 +411,9 @@ class Gimme {
     object BinContinue {
       def NUMBER(num: Int) {
         lineBuilder setGimmeValue num
+        lineBuilder.withComplete
+
+        AndOutputExtend
       }
     }
 
@@ -374,6 +426,8 @@ class Gimme {
     def NEGATION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_NEGATION
+
+      AndOutputExtend
     }
 
     ////////////
