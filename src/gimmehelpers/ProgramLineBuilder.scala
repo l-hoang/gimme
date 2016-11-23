@@ -15,7 +15,12 @@ class ProgramLineBuilder {
   // marker for first line
   var firstLine = true
 
+  // says if this line (result) should be printed
   var shouldPrint = false
+
+  // says if binary op with construction is done
+  var withDone = false
+
 
   /* set the next op */
   def setOp(newOp: GimmeOpEnum) = {
@@ -70,6 +75,12 @@ class ProgramLineBuilder {
     condBool = false
   }
 
+  /* say this line should be printed */
+  def setOutput = shouldPrint = true
+
+  /* with construction complete */
+  def withComplete = withDone = true
+
   //////////////////////////////////////
   // Line builder returns a line here //
   //////////////////////////////////////
@@ -122,15 +133,29 @@ class ProgramLineBuilder {
       case G_BREAK_FALSE => lineToReturn = GimmeBreakFalse(-1)
 
       case G_ADDITION => lineToReturn = GimmeAddition()
-      case G_ADDITION_WITH => lineToReturn = GimmeAdditionWith(currentNumber)
+      case G_ADDITION_WITH => 
+        if (!withDone) {
+          throw new RuntimeException("With construct didn't specify a number")
+        }
+        lineToReturn = GimmeAdditionWith(currentNumber)
       case G_SUBTRACTION => lineToReturn = GimmeSubtraction()
       case G_SUBTRACTION_WITH => 
+        if (!withDone) {
+          throw new RuntimeException("With construct didn't specify a number")
+        }
         lineToReturn = GimmeSubtractionWith(currentNumber)
       case G_MULTIPLICATION => lineToReturn = GimmeMultiplication()
       case G_MULTIPLICATION_WITH => 
+        if (!withDone) {
+          throw new RuntimeException("With construct didn't specify a number")
+        }
         lineToReturn = GimmeMultiplicationWith(currentNumber)
       case G_DIVISION => lineToReturn = GimmeDivision()
-      case G_DIVISION_WITH => lineToReturn = GimmeDivisionWith(currentNumber)
+      case G_DIVISION_WITH => 
+        if (!withDone) {
+          throw new RuntimeException("With construct didn't specify a number")
+        }
+        lineToReturn = GimmeDivisionWith(currentNumber)
 
       case G_NEGATION => lineToReturn = GimmeNegation()
 
@@ -148,11 +173,13 @@ class ProgramLineBuilder {
       lineToReturn.doPrint
     }
 
-    // reset everything in prep for next line
+    /* reset everything in prep for next line */
     // reset op
     currentOp = G_NONE
     // reset print
     shouldPrint = false
+    // reset with done
+    withDone = false
 
     lineToReturn
   }
