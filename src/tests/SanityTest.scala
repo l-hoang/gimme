@@ -141,6 +141,10 @@ object SanityTest extends Gimme {
         GIMME EQUAL TO NUMBER 20;
         GIMME OUTPUT;
 
+        //////////////////////////////////
+        // Function declaration testing //
+        //////////////////////////////////
+
         GIMME A "FUNCTION DECL TEST" AND OUTPUT;
 
         GIMME THE BELOW AS "lol";
@@ -152,6 +156,10 @@ object SanityTest extends Gimme {
         GIMME THE END OF "lol";
         
         GIMME A "FUNCTION DECL DONE" AND OUTPUT;
+
+        //////////////////////
+        // Negation testing //
+        //////////////////////
 
         GIMME A "TESTING NEGATION" AND OUTPUT;
 
@@ -167,6 +175,10 @@ object SanityTest extends Gimme {
         GIMME OUTPUT; // -20
         GIMME NEGATION;
         GIMME OUTPUT; // 20
+
+        //////////////////
+        // Loop testing //
+        //////////////////
 
         GIMME A 1;
 
@@ -184,8 +196,16 @@ object SanityTest extends Gimme {
         GIMME AN EXIT IF TRUE;
         GIMME CONTINUOUSLY THE ABOVE;
 
+        ///////////////////////////
+        // Function call testing //
+        ///////////////////////////
+
         GIMME THE RESULT OF "lol";
         GIMME A "done" AND OUTPUT;
+
+        //////////////////////////////////
+        // And output construct testing //
+        //////////////////////////////////
 
         GIMME A "\n\n\n\n with output test \n\n\n" AND OUTPUT;
 
@@ -203,15 +223,25 @@ object SanityTest extends Gimme {
         GIMME A 1;
         GIMME A 1;
 
-        //// should be 2
-        //GIMME ADDITION AND OUTPUT;
-        //// should be 3
-        //GIMME ADDITION WITH NUMBER 1 AND OUTPUT;
+        // should be 2
+        GIMME ADDITION AND OUTPUT;
+        // should be 3
+        (GIMME ADDITION WITH NUMBER 1) AND OUTPUT;
 
-        //// should be 1
-        //GIMME SUBTRACTION AND OUTPUT;
-        //// should be 2
-        //GIMME SUBTRACTION WITH NUMBER 3 AND OUTPUT;
+        // should be 1
+        GIMME SUBTRACTION AND OUTPUT;
+        // should be 2
+        GIMME SUBTRACTION WITH NUMBER 3 AND OUTPUT;
+
+        // should be 2
+        GIMME MULTIPLICATION AND OUTPUT;
+        // should be 6
+        GIMME MULTIPLICATION WITH NUMBER 3 AND OUTPUT;
+
+        // should be 3
+        GIMME DIVISION AND OUTPUT;
+        // should be 3
+        GIMME DIVISION WITH NUMBER 9 AND OUTPUT;
 
         RUN;
     }
