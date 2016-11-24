@@ -466,7 +466,7 @@ class Gimme {
 
     /* continues parsing the OP WITH <number> line */
     object BinContinue {
-      def NUMBER(num: Int) {
+      def NUMBER(num: Int) = {
         lineBuilder setGimmeValue num
         lineBuilder.lineComplete
 
@@ -496,6 +496,7 @@ class Gimme {
     object OutputGrabber {
       def OUTPUT {
         lineBuilder.setOutput
+        lineBuilder.lineComplete
       }
     }
 
