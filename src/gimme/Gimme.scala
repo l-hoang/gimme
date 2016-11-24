@@ -319,6 +319,7 @@ class Gimme {
         }
 
         lineBuilder.lineComplete
+        AndOutputExtend
       }
 
       /* in case no range is specified but output is */
