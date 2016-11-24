@@ -243,6 +243,29 @@ object SanityTest extends Gimme {
         // should be 3
         GIMME DIVISION WITH NUMBER 9 AND OUTPUT;
 
+
+        // FALSE
+        GIMME GREATER THAN AND OUTPUT;
+        // TRUE
+        GIMME GREATER THAN EQUAL TO AND OUTPUT;
+        // FALSE
+        GIMME LESS THAN AND OUTPUT;
+        // TRUE
+        GIMME LESS THAN EQUAL TO AND OUTPUT;
+        // TRUE
+        GIMME EQUAL TO AND OUTPUT;
+
+        // true
+        GIMME GREATER THAN NUMBER 4 AND OUTPUT;
+        // true
+        GIMME GREATER THAN EQUAL TO NUMBER 4 AND OUTPUT;
+        // FALSE
+        GIMME LESS THAN NUMBER 4 AND OUTPUT;
+        // false
+        GIMME LESS THAN EQUAL TO NUMBER 4 AND OUTPUT;
+        // true
+        GIMME EQUAL TO NUMBER 3 AND OUTPUT;
+
         RUN;
     }
 }
