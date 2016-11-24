@@ -43,6 +43,7 @@ class Gimme {
     def A(n: NumberWord) = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_NUMBER_RANDOM
+      lineBuilder.lineComplete
 
       NumberContinue
     }
@@ -52,6 +53,7 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue num
       lineBuilder setOp OpEnums.G_NUMBER
+      lineBuilder.lineComplete
 
       AndOutputExtend
     }
@@ -62,6 +64,7 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue num
       lineBuilder setOp OpEnums.G_NUMBER
+      lineBuilder.lineComplete
 
       AndOutputExtend
     }
@@ -69,6 +72,7 @@ class Gimme {
     /* continues the parse of a Gimme A Number line */
     object NumberContinue {
       def BETWEEN(lowerBound: Int) = {
+        lineBuilder.lineNotComplete
         // continue the parse
         new AndContinue(lowerBound)
       }
@@ -84,6 +88,7 @@ class Gimme {
       def AND(upperBound: Int) = {
         lineBuilder.setGimmeRange(low, upperBound)
         lineBuilder setOp OpEnums.G_NUMBER_RANGE
+        lineBuilder.lineComplete
 
         AndOutputExtend
       }
@@ -97,6 +102,7 @@ class Gimme {
     def A(s: StringWord) = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_STRING_RANDOM
+      lineBuilder.lineComplete
 
       AndOutputExtend
     }
@@ -106,6 +112,7 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue s
       lineBuilder setOp OpEnums.G_STRING
+      lineBuilder.lineComplete
 
       StringContinue
     }
@@ -126,6 +133,7 @@ class Gimme {
     def A(b: BoolWord) = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_BOOL_RANDOM
+      lineBuilder.lineComplete
 
       AndOutputExtend
     }
@@ -135,6 +143,7 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue b
       lineBuilder setOp OpEnums.G_BOOL
+      lineBuilder.lineComplete
 
       AndOutputExtend
     }
@@ -145,6 +154,7 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue true
       lineBuilder setOp OpEnums.G_BOOL
+      lineBuilder.lineComplete
 
       AndOutputExtend
     }
@@ -153,6 +163,7 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue false
       lineBuilder setOp OpEnums.G_BOOL
+      lineBuilder.lineComplete
 
       AndOutputExtend
     }
@@ -162,6 +173,7 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setGimmeValue b
       lineBuilder setOp OpEnums.G_BOOL
+      lineBuilder.lineComplete
 
       AndOutputExtend
     }
@@ -184,11 +196,12 @@ class Gimme {
     def THE(a: AboveWord) = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_COND_END
+      lineBuilder.lineComplete
     }
 
+    /* end of function */
     def THE(e: EndWord) = {
       programText finishLine lineBuilder
-      lineBuilder setOp OpEnums.G_COND_END
       
       EndContinue
     }
@@ -199,12 +212,14 @@ class Gimme {
       def IF(t: TrueWord) = {
         lineBuilder.conditionalTrueSet
         lineBuilder setOp OpEnums.G_COND_BEGIN
+        lineBuilder.lineComplete
       }
   
       /* conditional looking for a false */
       def IF(t: FalseWord) = {
         lineBuilder.conditionalFalseSet
         lineBuilder setOp OpEnums.G_COND_BEGIN
+        lineBuilder.lineComplete
       }
 
       /* save the function name to the line builder and tell it
@@ -212,6 +227,7 @@ class Gimme {
       def AS(functionName: String) = {
         lineBuilder setGimmeValue functionName
         lineBuilder setOp OpEnums.G_FUNCTION_BEGIN
+        lineBuilder.lineComplete
       }
     }
 
@@ -220,6 +236,7 @@ class Gimme {
       def OF(functionName: String) {
         lineBuilder setGimmeValue functionName
         lineBuilder setOp OpEnums.G_FUNCTION_END
+        lineBuilder.lineComplete
       }
     }
 
@@ -238,6 +255,7 @@ class Gimme {
       def OF(functionName: String) = {
         lineBuilder setGimmeValue functionName
         lineBuilder setOp OpEnums.G_FUNCTION_CALL
+        lineBuilder.lineComplete
       }
     }
 
@@ -250,6 +268,7 @@ class Gimme {
     def GREATER(t: ThanWord) = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_GREATER
+      lineBuilder.lineComplete
 
       compareContinue
     }
@@ -257,6 +276,7 @@ class Gimme {
     def LESS(t: ThanWord) = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_LESS
+      lineBuilder.lineComplete
 
       compareContinue
     }
@@ -264,6 +284,7 @@ class Gimme {
     def EQUAL(t: ToWord) = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_EQUAL
+      lineBuilder.lineComplete
 
       compareContinue
     }
@@ -277,6 +298,7 @@ class Gimme {
             throw new RuntimeException("comparator EQUAL TO continues greater " +
                                        "than or less than only")
         }
+        lineBuilder.lineComplete
 
         compareContinue
       }
@@ -295,6 +317,8 @@ class Gimme {
             throw new RuntimeException("in comparator parse; only takes compare "+
                                        "ops")
         }
+
+        lineBuilder.lineComplete
       }
 
       /* in case no range is specified but output is */
@@ -317,11 +341,13 @@ class Gimme {
       /* loop beginning */
       def BELOW = {
         lineBuilder setOp OpEnums.G_LOOP_BEGIN
+        lineBuilder.lineComplete
       }
 
       /* loop end */
       def ABOVE = {
         lineBuilder setOp OpEnums.G_LOOP_END
+        lineBuilder.lineComplete
       }
     }
 
@@ -333,6 +359,7 @@ class Gimme {
     def AN(e: ExitWord) = {
         programText finishLine lineBuilder
         lineBuilder setOp OpEnums.G_BREAK
+        lineBuilder.lineComplete
 
         BreakContinue
     }
@@ -354,8 +381,14 @@ class Gimme {
     def ADDITION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_ADDITION
+      lineBuilder.lineComplete
+    }
 
-      AndOutputExtend
+    def ADDITION(a: AndWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_ADDITION
+
+      OutputGrabber
     }
 
     def ADDITION(w: WithWord) = {
@@ -368,8 +401,16 @@ class Gimme {
     def SUBTRACTION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_SUBTRACTION
+      lineBuilder.lineComplete
 
       AndOutputExtend
+    }
+
+    def SUBTRACTION(a: AndWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_SUBTRACTION
+
+      OutputGrabber
     }
 
     def SUBTRACTION(w: WithWord) = {
@@ -382,8 +423,16 @@ class Gimme {
     def MULTIPLICATION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_MULTIPLICATION
+      lineBuilder.lineComplete
 
       AndOutputExtend
+    }
+
+    def MULTIPLICATION(a: AndWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_MULTIPLICATION
+
+      OutputGrabber
     }
 
     def MULTIPLICATION(w: WithWord) = {
@@ -396,8 +445,16 @@ class Gimme {
     def DIVISION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_DIVISION
+      lineBuilder.lineComplete
 
       AndOutputExtend
+    }
+
+    def DIVISION(a: AndWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_DIVISION
+
+      OutputGrabber
     }
 
     def DIVISION(w: WithWord) = {
@@ -411,7 +468,7 @@ class Gimme {
     object BinContinue {
       def NUMBER(num: Int) {
         lineBuilder setGimmeValue num
-        lineBuilder.withComplete
+        lineBuilder.lineComplete
 
         AndOutputExtend
       }
@@ -426,8 +483,20 @@ class Gimme {
     def NEGATION = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_NEGATION
+      lineBuilder.lineComplete
 
       AndOutputExtend
+    }
+
+    ///////////
+    // Other //
+    ///////////
+
+    /* used to grab a single OUTPUT word (and no more than that) */
+    object OutputGrabber {
+      def OUTPUT {
+        lineBuilder.setOutput
+      }
     }
 
     ////////////
@@ -438,6 +507,7 @@ class Gimme {
     def OUTPUT = {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_OUTPUT
+      lineBuilder.lineComplete
     }
   }
 

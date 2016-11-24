@@ -78,8 +78,10 @@ class ProgramLineBuilder {
   /* say this line should be printed */
   def setOutput = shouldPrint = true
 
-  /* with construction complete */
+  /* construction complete */
   def lineComplete = lineDone = true
+  /* construction not complete */
+  def lineNotComplete = lineDone = false
 
   //////////////////////////////////////
   // Line builder returns a line here //
@@ -160,16 +162,18 @@ class ProgramLineBuilder {
       case G_NEGATION => lineToReturn = GimmeNegation()
 
       case G_NONE =>
-        if (!firstLine)
+        if (!firstLine) {
           throw new RuntimeException("Adding an empty line")
-        else
-          // first line meaning nothing supposed to be there
-          firstLine = false
+        }
     }
 
     // make sure for sanity that the line was actually complete
-    if (!lineDone) {
+    if (!lineDone && !firstLine) {
       throw new RuntimeException("finished a non-complete line in line builder")
+    }
+
+    if (firstLine) {
+      firstLine = false
     }
 
     // if AND OUTPUT was found, this will be true, so set the line to a print
