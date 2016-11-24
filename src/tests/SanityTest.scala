@@ -266,6 +266,9 @@ object SanityTest extends Gimme {
         // true
         GIMME EQUAL TO NUMBER 3 AND OUTPUT;
 
+        // false
+        GIMME NEGATION AND OUTPUT;
+
         RUN;
     }
 }

@@ -485,8 +485,14 @@ class Gimme {
       programText finishLine lineBuilder
       lineBuilder setOp OpEnums.G_NEGATION
       lineBuilder.lineComplete
+    }
 
-      AndOutputExtend
+    def NEGATION(a: AndWord) = {
+      programText finishLine lineBuilder
+      lineBuilder setOp OpEnums.G_NEGATION
+      lineBuilder.lineComplete
+      
+      OutputGrabber
     }
 
     ///////////
